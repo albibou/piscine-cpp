@@ -1,6 +1,6 @@
 # Project
 
-NAME = minishell
+NAME = Megaphone 
 
 # Compiler
 
@@ -22,7 +22,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= 
+SRC	= megaphone.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.c=.o))
 
@@ -33,10 +33,10 @@ DEPS		= $(OBJ:.o=.d)
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.c
 		mkdir -p $(dir $@)
-		@ $(CC) $(CFLAGS) -c $< -o $@
+		@ $(CPP) $(FLAGS) -c $< -o $@
 
-${NAME} :	${OBJS}
-		${CC} -o ${NAME} -g ${CFLAGS} ${OBJS} ${LIBFT}
+${NAME} :	${OBJ}
+		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
