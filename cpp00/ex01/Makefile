@@ -1,11 +1,11 @@
 # Project
 
-NAME = megaphone 
+NAME = phonebook 
 
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98
+FLAGS	= -Wall -Werror -Wextra -g3 -std=c++98
 
 # Paths
 
@@ -22,7 +22,9 @@ RM	= rm -rf
 
 # Files
 
-SRC	= megaphone.cpp \
+SRC	= Phonebook.cpp \
+	  Contact.cpp \
+	  main.cpp
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
