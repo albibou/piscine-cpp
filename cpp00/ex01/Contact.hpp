@@ -14,21 +14,30 @@
 # define CONTACT_H
 
 #include <string>
+#include <iostream>
+#include <ctype.h>
+#include <cstdlib>
 
 class   Contact{
+
+private :
+
+    std::string _FirstName;
+    std::string _LastName;
+    std::string _NickName;
+    std::string _PhoneNumber;
+    std::string _DarkSecret;
+
+    std::string    _get_litteral(std::string str);
+    std::string    _get_number(std::string str);
+    bool           _check_number(std::string str);
 
 public :
 
     Contact();
     ~Contact();
     
-    std::string FirstName;
-    std::string LastName;
-    std::string NickName;
-    std::string PhoneNumber;
-    std::string DarkSecret;
-
-
+    void    fill_contact(void);
 };
 
 #endif

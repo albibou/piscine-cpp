@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "Phonebook.hpp"
-#include <iostream>
 #include <cstdio>
 
+#define GET_INPUT "Enter one of the following commands : ADD / SEARCH / EXIT"   
 #define BAD_INPUT "You can only use ADD / SEARCH / EXIT"
-
 
 int main(void)
 {
@@ -22,18 +21,20 @@ int main(void)
     std::string prompt;
     std::string tmp;
 
+    std::cout << GET_INPUT << std::endl;
     while(1)
     {
         if(!std::getline(std::cin, prompt))
             break ;
-        if (prompt.compare("ADD"))
+        if (prompt == "ADD")
+            phonebook.get_contact();
+        else if (prompt == "SEARCH")
             std::cout << prompt << std::endl;
-        else if (prompt.compare("SEARCH"))
-            std::cout << prompt << std::endl;
-        else if (prompt.compare("EXIT"))
+        else if (prompt == "EXIT")
             break ;
         else
             std::cout << BAD_INPUT << std::endl;
     }
+    std::cout << EXIT_PROGRAM << std::endl;
     return (0);
 }

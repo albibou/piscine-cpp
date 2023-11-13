@@ -11,10 +11,22 @@
 /* ************************************************************************** */
 #include "Phonebook.hpp"
 
-PhoneBook::PhoneBook(void) {
+PhoneBook::PhoneBook(void) : _last_index(-1) {
     return ;
 }
 
 PhoneBook::~PhoneBook(void){
+    return ;
+}
+
+void    PhoneBook::get_contact(void)
+{
+    static int  i = 0;
+
+    this->_last_index++;
+    this->_contacts[i % 8].fill_contact();
+    i++;
+    if (i == 8)
+        i = 0;
     return ;
 }

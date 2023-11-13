@@ -17,16 +17,19 @@
 
 class   PhoneBook{
 
-public :
+private :
 
-    Contact contacts[8];
+    Contact _contacts[8];
+    int     _last_index; 
+
+public :
 
     PhoneBook();
     ~PhoneBook();
 
     void    display_all_contacts(Contact contacts);
-    void    diplay_a_contact(Contact contacts);
-    void    fill_a_contact(void);
+    void    display_a_contact(Contact contacts);
+    void    get_contact(void);
 
 };
 
