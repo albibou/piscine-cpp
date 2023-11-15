@@ -16,7 +16,7 @@
 #include "Contact.hpp"
 #include <sstream>
 
-#define GET_INDEX "Please enter an index "
+#define GET_INDEX "Please enter an index (Or EXIT to come back) "
 #define BAD_INDEX "Index can only be between 1 and 8"
 #define NO_CONTACT "This index is not filled yet "
 
@@ -28,14 +28,15 @@ private :
     int     _last_index; 
 
     bool    _check_index(std::string str, int *i) const;
+    void    _display_a_contact(void) const;
+    void    _display_a_line(int n, std::string s1, std::string s2, std::string s3) const;
+
 public :
 
     PhoneBook();
     ~PhoneBook();
 
     void    display_all_contacts(void) const;
-    void    display_a_contact(void) const;
-    void    display_a_line(int n, std::string s1, std::string s2, std::string s3) const;
     void    get_contact(void);
 
 };

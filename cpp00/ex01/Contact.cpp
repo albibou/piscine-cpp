@@ -74,8 +74,12 @@ std::string     Contact::get_content(std::string str) const{
         return this->_FirstName;
     else if (str == "Last")
         return this->_LastName;
-    else 
+    else if (str == "Nick")
         return this->_NickName;
+    else if (str == "Phone")
+        return this->_PhoneNumber;
+    else
+        return this->_DarkSecret;
 }
 
 void    Contact::fill_contact() {
