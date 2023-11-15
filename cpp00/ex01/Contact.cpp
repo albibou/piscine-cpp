@@ -6,14 +6,10 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:05:58 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/10 19:07:28 by atardif          ###   ########.fr       */
+/*   Updated: 2023/11/15 15:11:40 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Contact.hpp"
-
-#define EMPTY_FIELD "A field cannot be empty, enter a value" 
-#define NOT_NUMBER "A Phone Number can only be composed of digits, please try again"
-#define EXIT_PROGRAM    "End of program, exiting ..."
 
 Contact::Contact(void){
     return ;
@@ -23,8 +19,7 @@ Contact::~Contact(void){
     return ;
 }
 
-std::string    Contact::_get_litteral(std::string str)
-{
+std::string    Contact::_fill_litteral(std::string str) const{
     std::string buffer;
 
     while (1)
@@ -43,8 +38,7 @@ std::string    Contact::_get_litteral(std::string str)
     return (buffer);
 }
 
-bool           Contact::_check_number(std::string str)
-{
+bool           Contact::_check_number(std::string str) const {
     for (size_t i = 0; i < str.length() ; i++)
     {
         if (!isdigit((int)str[i]))
@@ -53,8 +47,7 @@ bool           Contact::_check_number(std::string str)
     return (true);
 }
 
-std::string    Contact::_get_number(std::string str)
-{
+std::string    Contact::_fill_number(std::string str) const {
     std::string buffer;
 
     while (1)
@@ -75,11 +68,21 @@ std::string    Contact::_get_number(std::string str)
     return (buffer);
 }
 
+std::string     Contact::get_content(std::string str) const{
+
+    if (str == "First")
+        return this->_FirstName;
+    else if (str == "Last")
+        return this->_LastName;
+    else 
+        return this->_NickName;
+}
+
 void    Contact::fill_contact() {
-    this->_FirstName = this->_get_litteral("First Name : ");
-    this->_LastName = this->_get_litteral("Last Name : ");
-    this->_NickName = this->_get_litteral("Nick Name : ");
-    this->_PhoneNumber = this->_get_number("Phone Number : ");
-    this->_DarkSecret = this->_get_litteral("Dark Secret : ");
+    this->_FirstName = this->_fill_litteral("First Name : ");
+    this->_LastName = this->_fill_litteral("Last Name : ");
+    this->_NickName = this->_fill_litteral("Nick Name : ");
+    this->_PhoneNumber = this->_fill_number("Phone Number : ");
+    this->_DarkSecret = this->_fill_litteral("Dark Secret : ");
     return ;
 }

@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:06:10 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/10 18:42:00 by atardif          ###   ########.fr       */
+/*   Updated: 2023/11/15 16:20:31 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Phonebook.hpp"
@@ -21,19 +21,19 @@ int main(void)
     std::string prompt;
     std::string tmp;
 
-    std::cout << GET_INPUT << std::endl;
     while(1)
     {
+        std::cout << GET_INPUT << std::endl;
         if(!std::getline(std::cin, prompt))
             break ;
         if (prompt == "ADD")
             phonebook.get_contact();
         else if (prompt == "SEARCH")
-            std::cout << prompt << std::endl;
+            phonebook.display_all_contacts();
         else if (prompt == "EXIT")
             break ;
         else
-            std::cout << BAD_INPUT << std::endl;
+            continue;
     }
     std::cout << EXIT_PROGRAM << std::endl;
     return (0);
