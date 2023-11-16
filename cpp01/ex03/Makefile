@@ -1,11 +1,11 @@
 # Project
 
-NAME = hibrain  
+NAME = violence  
 
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -g3
 
 # Paths
 
@@ -23,6 +23,9 @@ RM	= rm -rf
 # Files
 
 SRC	= ./main.cpp \
+	  ./Weapon.cpp \
+	  ./HumanA.cpp \
+	  ./HumanB.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

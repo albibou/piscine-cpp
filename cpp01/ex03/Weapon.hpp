@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:00:03 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/16 18:03:00 by atardif          ###   ########.fr       */
+/*   Updated: 2023/11/16 19:32:06 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ class   Weapon{
 
     public :
 
-        Weapon(void);
+        Weapon(std::string type);
         ~Weapon(void);
 
         std::string const   &getType(void);
-        void                setType(std::string);
+        void                setType(std::string type);
 };
 
 #endif
