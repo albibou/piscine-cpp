@@ -1,11 +1,11 @@
 # Project
 
-NAME = hibrain  
+NAME = sed_is_for_losers  
 
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98
+FLAGS	= -Wall -Werror -Wextra -std=c++98 -g3
 
 # Paths
 
