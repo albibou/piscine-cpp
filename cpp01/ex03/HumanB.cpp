@@ -18,8 +18,6 @@ HumanB::HumanB(std::string name) : _name(name), _weapon(NULL){
 }
 
 HumanB::~HumanB(void){
-    //if (this->_weapon)
-        //delete this->_weapon;
     return;
 }
 
@@ -32,14 +30,8 @@ void    HumanB::attack(void)
     return ;
 }
 
-void    HumanB::setWeapon(Weapon weapon)
+void    HumanB::setWeapon(Weapon& weapon)
 {
-    Weapon  *dest = new Weapon(weapon.getType());
-    if (!dest)
-    {
-        std::cout << "Allocation failed" << std::endl;
-        return ;
-    }
-    this->_weapon = dest;
+    this->_weapon = &weapon;
     return ;
 }
