@@ -37,6 +37,9 @@ set splitright
      call append(12," ")                                                                                             
      call append(13,"#endif // ".toupper(a:ClassName)."_H")                                                              
      :execute 'write' header                                                                                             
+     :execute 'quit'
+     :execute 'vertical split' header
+
    "================== editing source file ========================                                                      
      let src    = a:ClassName.".cpp"                                                                                     
      :vsp %:h/.cpp                                                                                                                                                                                                                     
@@ -52,6 +55,9 @@ set splitright
      call append(9,"    return ;")                                                                                            
      call append(10,"}")                                                                                                  
      :execute 'write' src
+     :execute 'quit'
+     :execute 'vertical split' src
+
  endfunction
 
 command! -nargs=1 Class call Class(<f-args>) 
@@ -78,6 +84,9 @@ command! -nargs=1 Class call Class(<f-args>)
      call append(14, "};")                                                                                               
      call append(15,"#endif // ".toupper(a:ClassName)."_H")                                                              
      :execute 'write' header                                                                                             
+     :execute 'quit'
+     :execute 'vertical split' header
+
    "================== editing source file ========================                                                      
      let src    = a:ClassName.".cpp"                                                                                     
      :vsp %:h/.cpp                                                                                                                                                                                                                     
@@ -104,6 +113,8 @@ command! -nargs=1 Class call Class(<f-args>)
      call append(20,"   return *this;")                                                                                            
      call append(21,"}") 
      :execute 'write' src
+     :execute 'quit'
+     :execute 'vertical split' src
  endfunction
 
 command! -nargs=1 Cclass call Cclass(<f-args>) 
