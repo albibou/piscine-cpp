@@ -2,12 +2,15 @@
 
 int main(void)
 {
-    ClapTrap    clap("Robert");
+    ClapTrap    clap("Abott");
+    ClapTrap    clap2("Newman");
 
-    clap.attack("Roger");
-    clap.takeDamage(5);
+    clap.attack("Newman");
+    clap2.takeDamage(0);
+
+
     clap.beRepaired(1000);
     for (int i = 0; i < 15; i++)
-        clap.attack("Maurice");
+        clap.attack("Newman");
     return (0);
 }
