@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:05:46 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/15 17:13:17 by atardif          ###   ########.fr       */
+/*   Updated: 2023/11/24 11:19:16 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Phonebook.hpp"
@@ -25,10 +25,10 @@ bool    PhoneBook::_check_index(std::string str, int *i) const {
     if (str.length() != 1 || str[*i] == '0' || !isdigit(str[*i]))
         return  (std::cout << BAD_INDEX << std::endl, false);
     *i = str[*i] - '0';
-    if (this->_last_index <= 7 && *i > this->_last_index + 1)
-        return  (std::cout << NO_CONTACT << std::endl, false);
-    else if (*i < 1 && *i > 8)
+    if (*i < 1 || *i > 8)
         return  (std::cout << BAD_INDEX << std::endl, false);
+    else if (this->_last_index <= 7 && *i > this->_last_index + 1)
+        return  (std::cout << NO_CONTACT << std::endl, false);
     return (true);
 }
 
