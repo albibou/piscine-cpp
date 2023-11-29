@@ -14,11 +14,15 @@
 
 int main(void)
 {
-    Zombie  *zomb1 = newZombie("Robert");
+    Zombie  *zomb1 = newZombie("Victor");
+    Zombie  *zomb2 = newZombie("Newman");
 
     zomb1->announce();
+    zomb2->announce();
 
     randomChump("Marc");
+    randomChump("Lavoine");
     delete zomb1;
+    delete zomb2;
     return (0);
 }

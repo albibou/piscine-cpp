@@ -14,6 +14,8 @@
 # define HUMANA_H
 
 # include "Weapon.hpp"
+# include <string>
+# include <iostream>
 
 class   HumanA{
 

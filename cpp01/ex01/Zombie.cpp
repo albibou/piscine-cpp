@@ -12,7 +12,7 @@
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(void) : _name("") {
+Zombie::Zombie(void) : _name("Default") {
 
     return;
 } 

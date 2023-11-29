@@ -13,15 +13,20 @@ std::string    ft_look_to_replace(std::string to_find, std::string to_replace, s
     int buffsize = buffer.size();
     int findsize = to_find.size();
     std::string tmp;
-    const size_t found = buffer.find(to_find);
+    size_t found;
 
-    if (found != std::string::npos)
-        return (tmp = buffer.substr(0, found) + to_replace + buffer.substr((found + findsize), buffsize));
+    while ((found = buffer.find(to_find)) != std::string::npos)
+    {
+        tmp = buffer.substr(0, found) + to_replace + buffer.substr((found + findsize), buffsize);
+        buffer = tmp;
+    }
     return(buffer);
 }
 
 int main(int argc, char **argv)
 {
+    if (argc != 4)
+        return ((std::cout << USAGE << std::endl), 1);
     std::string     filename = argv[1];
     std::string     to_find = argv[2];
     std::string     to_replace = argv[3];
@@ -29,8 +34,6 @@ int main(int argc, char **argv)
     std::ifstream   originfs(argv[1]);
     std::ofstream   copyfs;
 
-    if (argc != 4)
-        return ((std::cout << USAGE << std::endl), 1);
     if (!to_find.size() || !to_replace.size())
         return ((std::cout << STRING_EMPTY << std::endl), 1);
     if (!originfs.is_open())

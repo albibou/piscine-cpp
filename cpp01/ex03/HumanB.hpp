@@ -14,6 +14,8 @@
 # define HUMANB_H
 
 # include "Weapon.hpp"
+# include <string>
+# include <iostream>
 
 class   HumanB{
 
