@@ -14,11 +14,13 @@ std::string    ft_look_to_replace(std::string to_find, std::string to_replace, s
     int findsize = to_find.size();
     std::string tmp;
     size_t found;
+    size_t f_start = 0;
 
-    while ((found = buffer.find(to_find)) != std::string::npos)
+    while ((found = buffer.find(to_find, f_start)) != std::string::npos && to_find != to_replace)
     {
         tmp = buffer.substr(0, found) + to_replace + buffer.substr((found + findsize), buffsize);
         buffer = tmp;
+        f_start = found + 1;
     }
     return(buffer);
 }
