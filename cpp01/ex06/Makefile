@@ -1,10 +1,10 @@
 # Project
 
-NAME = 
+NAME = harl_filter
 
 # Compiler
 
-CXX	= c++
+CXX	= g++
 FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
@@ -23,6 +23,7 @@ RM	= rm -rf
 # Files
 
 SRC	= ./main.cpp \
+	  ./Harl.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
