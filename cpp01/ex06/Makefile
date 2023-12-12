@@ -1,11 +1,11 @@
 # Project
 
-NAME = harl_filter
+NAME = harlFilter
 
 # Compiler
 
-CXX	= g++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+CXX	= c++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 # Paths
 
