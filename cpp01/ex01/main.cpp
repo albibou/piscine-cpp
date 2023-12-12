@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:01 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/16 17:43:11 by atardif          ###   ########.fr       */
+/*   Updated: 2023/12/12 16:44:00 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int main(void)
 {
-    Zombie  *zomb1 = zombieHorde(30, "Marc");
-    
-   for (int i = 0; i < 30; i++)
-       zomb1[i].announce();
+    Zombie  *zomb1 = zombieHorde(42, "Marc");
+    if(!zomb1)
+        return ((std::cout << "Allocation failed" << std::endl), 1);
+    for (int i = 0; i < 30; i++)
+        zomb1[i].announce();
 
-   delete[] zomb1;
-   return (0);
+    delete[] zomb1;
+    return (0);
 }
