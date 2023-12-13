@@ -59,8 +59,10 @@ int main(int argc, char **argv)
     {
         std::string buffer;
         if (!getline(originfs, buffer))
-            return (0);
-        copyfs << ft_look_to_replace(to_find, to_replace, buffer) << std::endl;
+            return (originfs.close(), copyfs.close(), 0);
+        if (originfs.good())
+            buffer += '\n';
+        copyfs << ft_look_to_replace(to_find, to_replace, buffer);
     }
-    return (0);
+    return (originfs.close(), copyfs.close(), 0);
 }
