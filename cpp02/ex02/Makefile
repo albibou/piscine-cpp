@@ -4,7 +4,7 @@ NAME = now_we_talk
 
 # Compiler
 
-CPP	= c++
+CXX	= c++
 FLAGS	= -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
 # Paths
@@ -30,14 +30,14 @@ OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 DEPS		= $(OBJ:.o=.d)
 
 .c.o :	
-		${CPP} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
+		${CXX} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 		mkdir -p $(dir $@)
-		@ $(CPP) $(FLAGS) -c $< -o $@
+		@ $(CXX) $(FLAGS) -c $< -o $@
 
 ${NAME} :	${OBJ}
-		${CPP} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		${CXX} -o ${NAME} -g ${FLAGS} ${OBJ} 
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
