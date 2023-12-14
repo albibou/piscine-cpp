@@ -45,7 +45,7 @@ void    ScavTrap::attack(const std::string& target){
     if (!this->hitPoints)
         std::cout << "ScavTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
     else if (!this->energyPoints)
-        std::cout << "ScavTrap " << this->name << "has no energy points left and can't do anything" << std::endl;
+        std::cout << "ScavTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
     else
     {
         std::cout << "ScavTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
@@ -76,7 +76,9 @@ void    ScavTrap::beRepaired(unsigned int amount){
 
 void    ScavTrap::guardGate(void){
 
-    if (!energyPoints)
+    if (!this->hitPoints)
+        return (void)(std::cout << "ScavTrap " << this->name << " has no hit points left and is incounscious." << std::endl);
+    if (!this->energyPoints)
         return (void)(std::cout << "ScavTrap " << this->name << "has no energy points left and can't do anything" << std::endl);
     std::cout << "ScavTrap " << this->name << " is now in gatekeeping mode" <<std::endl;
     this->energyPoints--;

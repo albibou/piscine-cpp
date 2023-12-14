@@ -75,8 +75,10 @@ void    FragTrap::beRepaired(unsigned int amount){
 }
 
 void    FragTrap::highFivesGuys(void){
-    
-    if (!energyPoints)
+        
+    if (!this->hitPoints)
+        std::cout << "FragTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
+    if (!this->energyPoints)
         return (void)(std::cout << "FragTrap " << this->name << "has no energy points left and can't do anything" << std::endl);
     std::cout << "FragTrap " << this->name << " please siters and brothers of inheritance, give me a high five !!!" <<std::endl;
     this->energyPoints--;

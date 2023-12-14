@@ -39,7 +39,7 @@ void    ClapTrap::attack(const std::string& target){
     if (!this->_hitPoints)
         std::cout << "ClapTrap " << this->_name << " has no hit points left and is incounscious." << std::endl;
     else if (!this->_energyPoints)
-        std::cout << "ClapTrap " << this->_name << "has no energy points left and can't do anything" << std::endl;
+        std::cout << "ClapTrap " << this->_name << " has no energy points left and can't do anything" << std::endl;
     else
     {
         std::cout << "Claptrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
