@@ -4,7 +4,7 @@ NAME = phonebook
 
 # Compiler
 
-CPP	= c++
+CPP	= g++
 FLAGS	= -Wall -Werror -Wextra -g -std=c++98
 
 # Paths

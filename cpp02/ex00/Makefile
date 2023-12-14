@@ -5,7 +5,7 @@ NAME = first_canonical
 # Compiler
 
 CPP	= c++
-FLAGS	= -Wall -Werror -Wextra -std=c++98
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
 
 # Paths
 

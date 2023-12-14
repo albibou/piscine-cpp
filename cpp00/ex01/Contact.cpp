@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 18:05:58 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/15 15:11:40 by atardif          ###   ########.fr       */
+/*   Updated: 2023/12/10 16:22:46 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "Contact.hpp"
@@ -17,6 +17,21 @@ Contact::Contact(void){
 
 Contact::~Contact(void){
     return ;
+}
+
+bool        Contact::_check_format(std::string str) const{
+
+    bool    achar = false;
+    for (size_t i = 0; i < str.length(); i++)
+    {
+        if (isgraph((int)str[i]))
+            achar = true;
+        if (!isprint((int)str[i]))
+            return (false);
+    }
+    if (!achar)
+        return (false);
+    return (true);
 }
 
 std::string    Contact::_fill_litteral(std::string str) const{
@@ -32,6 +47,8 @@ std::string    Contact::_fill_litteral(std::string str) const{
         }
         if (!buffer.length())
             std::cout << EMPTY_FIELD << std::endl;
+        else if (!this->_check_format(buffer))
+            std::cout << CHAR_ERROR << std::endl;
         else
             break ;
     }

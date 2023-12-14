@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:41:43 by atardif           #+#    #+#             */
-/*   Updated: 2023/11/15 15:07:39 by atardif          ###   ########.fr       */
+/*   Updated: 2023/12/10 16:24:23 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define EMPTY_FIELD "A field cannot be empty, enter a value" 
 #define NOT_NUMBER "A Phone Number can only be composed of digits, please try again"
 #define EXIT_PROGRAM    "End of program, exiting ..."
+#define CHAR_ERROR    "Either input is empty or contains non printable characters, try again"
 
 class   Contact{
 
@@ -36,6 +37,7 @@ private :
     std::string    _fill_litteral(std::string str) const;
     std::string    _fill_number(std::string str) const;
     bool           _check_number(std::string str) const;
+    bool           _check_format(std::string str) const;
 
 public :
 
