@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 15:54:56 by atardif           #+#    #+#             */
+/*   Updated: 2023/12/16 15:56:12 by atardif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CLAPTRAP_H
 # define CLAPTRAP_H
  
@@ -22,9 +34,9 @@ class ClapTrap
    private:
 
       std::string   _name;
-      int   _hitPoints;
-      int   _energyPoints;
-      int   _attackDamage;
+      unsigned int   _hitPoints;
+      unsigned int   _energyPoints;
+      unsigned int   _attackDamage;
 };
 #endif // CLAPTRAP_H
 
