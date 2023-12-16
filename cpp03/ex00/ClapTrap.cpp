@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:54:46 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 15:54:49 by atardif          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:02:42 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
  
 ClapTrap::ClapTrap(void) : _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0){
      
-    std::cout << "Default Constructor called" << std::endl;
+    std::cout << "Default ClapTrap Constructor called" << std::endl;
     return ;
 }
  
 ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0){
      
-    std::cout << "Parametric Constructor called" << std::endl;
+    std::cout << "Parametric ClapTrap Constructor called" << std::endl;
     return ;
 }
 
 ClapTrap::ClapTrap(ClapTrap const & src){
 
     *this = src;
-    std::cout << "Copy Constructor called" << std::endl;
+    std::cout << "Copy ClapTrap Constructor called" << std::endl;
     return ;
 }
  
 ClapTrap::~ClapTrap(void){
  
-    std::cout << "Default Destructor called" << std::endl;
+    std::cout << "Default ClapTrap Destructor called" << std::endl;
     return ;
 }
  
