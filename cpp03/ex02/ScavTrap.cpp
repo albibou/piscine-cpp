@@ -66,44 +66,11 @@ void    ScavTrap::attack(const std::string& target){
     return ;
 }
 
-void    ScavTrap::takeDamage(unsigned int amount){
-
-    if (amount > this->hitPoints)
-    {
-        this->hitPoints = 0;
-        std::cout << "ScavTrap " << this->name << " has no hit points left and fall incounscious" << std::endl;
-        return ;
-    }
-    this->hitPoints -= amount;
-    std::cout << "ScavTrap " << this->name << " is attacked, causing " << amount << " points of damage! He has " << this->hitPoints << " left" << std::endl;
-    return ;
-}
-
-void    ScavTrap::beRepaired(unsigned int amount){
-      
-    if (!this->hitPoints)
-        std::cout << "ScavTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
-    else if (!this->energyPoints)
-        std::cout << "ScavTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
-    else 
-    {
-        std::cout << "ScavTrap " << this->name << " repairs itself and get " << amount << " hit points back, for a total of " << this->hitPoints + amount << std::endl;
-        this->hitPoints += amount;
-        this->energyPoints--;
-    }
-    return ;
-}
-
 void    ScavTrap::guardGate(void){
 
     if (!this->hitPoints)
         std::cout << "ScavTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
-    else if (!this->energyPoints)
-        std::cout << "ScavTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
     else
-    {
         std::cout << "ScavTrap " << this->name << " is now in gatekeeping mode" <<std::endl;
-        this->energyPoints--;
-    }
     return ;
 }

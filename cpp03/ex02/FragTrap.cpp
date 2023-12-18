@@ -52,48 +52,6 @@ FragTrap & FragTrap::operator=(FragTrap const & rhs){
    return *this;
 }
 
-void    FragTrap::attack(const std::string& target){
-
-    if (!this->hitPoints)
-        std::cout << "FragTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
-    else if (!this->energyPoints)
-        std::cout << "FragTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
-    else
-    {
-        std::cout << "FragTrap " << this->name << " attacks " << target << ", causing " << this->attackDamage << " points of damage!" << std::endl;
-        this->energyPoints--;
-    }
-    return ;
-}
-
-void    FragTrap::takeDamage(unsigned int amount){
-
-    if (amount > this->hitPoints)
-    {
-        this->hitPoints = 0;
-        std::cout << "FragTrap " << this->name << " has no hit points left and fall incounscious" << std::endl;
-        return ;
-    }
-    this->hitPoints -= amount;
-    std::cout << "FragTrap " << this->name << " is attacked, causing " << amount << " points of damage! He has " << this->hitPoints << " left" << std::endl;
-    return ;
-}
-
-void    FragTrap::beRepaired(unsigned int amount){
-      
-    if (!this->hitPoints)
-        std::cout << "FragTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
-    else if (!this->energyPoints)
-        std::cout << "FragTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
-    else 
-    {
-        std::cout << "FragTrap " << this->name << " repairs itself and get " << amount << " hit points back, for a total of " << this->hitPoints + amount << std::endl;
-        this->hitPoints += amount;
-        this->energyPoints--;
-    }
-    return ;
-}
-
 void    FragTrap::highFivesGuys(void){
         
     if (!this->hitPoints)
