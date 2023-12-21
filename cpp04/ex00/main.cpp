@@ -6,7 +6,7 @@
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:05:57 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 18:06:02 by atardif          ###   ########.fr       */
+/*   Updated: 2023/12/16 18:24:04 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int main(void){
     const WrongAnimal   *beta = new WrongAnimal();
     const WrongAnimal   *x = new    WrongCat();
 
+    std::cout << std::endl;
 
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
@@ -31,10 +32,14 @@ int main(void){
     j->makeSound();
     meta->makeSound();
 
+    std::cout << std::endl;
+
     std::cout << beta->getType() << " " << std::endl;
     std::cout << x->getType() << " " << std::endl;
     beta->makeSound();
     x->makeSound();
+
+    std::cout << std::endl;
 
     delete meta;
     delete j;

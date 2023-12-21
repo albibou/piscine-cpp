@@ -30,7 +30,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name){
     return ;
 }
  
-FragTrap::FragTrap(FragTrap const & src){
+FragTrap::FragTrap(FragTrap const & src) : ClapTrap(src){
  
     *this = src;
     std::cout << "Copy FragTrap Constructor called" << std::endl;
@@ -56,12 +56,7 @@ void    FragTrap::highFivesGuys(void){
         
     if (!this->hitPoints)
         std::cout << "FragTrap " << this->name << " has no hit points left and is incounscious." << std::endl;
-    else if (!this->energyPoints)
-        std::cout << "FragTrap " << this->name << " has no energy points left and can't do anything" << std::endl;
     else
-    {
         std::cout << "FragTrap " << this->name << ": please sisters and brothers of inheritance, give me a high five !!!" <<std::endl;
-        this->energyPoints--;
-    }
     return ;
 }

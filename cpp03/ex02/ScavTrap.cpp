@@ -30,7 +30,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
     return ;
 }
  
-ScavTrap::ScavTrap(ScavTrap const & src){
+ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap(src){
  
     *this = src; 
     std::cout << "Copy ScavTrap Constructor called" << std::endl;
