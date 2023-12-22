@@ -26,7 +26,7 @@ class Cat : public Animal
  
       Cat &  operator=(Cat const & rhs);
  
-      void  makeSound(void) const;
+      virtual void  makeSound(void) const;
       void  fillIdea(std::string idea, int index);
       void  displayIdeas(void) const;
       void  displayanIdea(int index) const;

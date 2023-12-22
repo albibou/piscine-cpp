@@ -18,28 +18,37 @@
 
 int main(void){
 
+    std::cout << "Constructors called for \"good\" Animals : " << std::endl << std::endl;
     const Animal    *meta = new Animal();
     const Animal    *j = new Dog();
     const Animal    *i = new Cat();
+
+    std::cout << std::endl;
+
+    std::cout << "Get type of j : " << j->getType() << " " << std::endl;
+    std::cout << "Get type of i : " << i->getType() << " " << std::endl << std::endl;
+    std::cout << "i makes sound : "; 
+    i->makeSound();
+    std::cout << "j makes sound : ";
+    j->makeSound();
+    std::cout << "meta makes sound : ";
+    meta->makeSound();
+
+    std::cout << std::endl << "Constructors called for \"wrong\" Animals : " << std::endl <<std::endl;
+
     const WrongAnimal   *beta = new WrongAnimal();
     const WrongAnimal   *x = new    WrongCat();
 
     std::cout << std::endl;
-
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound();
-    j->makeSound();
-    meta->makeSound();
-
-    std::cout << std::endl;
-
-    std::cout << beta->getType() << " " << std::endl;
-    std::cout << x->getType() << " " << std::endl;
+    
+    std::cout << "Get type of beta : " << beta->getType() << " " << std::endl;
+    std::cout << "Get type of x : " << x->getType() << " " << std::endl << std::endl;
+    std::cout << "beta makes sound : ";
     beta->makeSound();
+    std::cout << "x makes sound : ";
     x->makeSound();
 
-    std::cout << std::endl;
+    std::cout << std::endl << "Destructors : " << std::endl << std::endl;
 
     delete meta;
     delete j;

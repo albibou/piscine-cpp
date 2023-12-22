@@ -34,6 +34,7 @@ Dog::~Dog(void){
 Dog & Dog::operator=(Dog const & rhs){
  
    this->type = rhs.type;
+   std::cout << "Dog assignation operator called" << std::endl;
    return *this;
 }
 

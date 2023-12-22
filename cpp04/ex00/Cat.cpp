@@ -32,8 +32,9 @@ Cat::~Cat(void){
 }
  
 Cat & Cat::operator=(Cat const & rhs){
- 
+
    this->type = rhs.type;
+   std::cout << "Cat assignation operator called" << std::endl;
    return *this;
 }
 

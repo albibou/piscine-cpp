@@ -4,7 +4,7 @@ NAME = abstract
 
 # Compiler
 
-CXX	= c++
+CXX	= clang++
 FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
@@ -49,7 +49,7 @@ ${NAME} :	${OBJ}
 all :		${NAME}
 
 clean :
-		${RM} ${OBJ}
+		${RM} ${OBJ} ${DEPS} ${BIN_PATH}
 
 fclean :	clean
 		${RM} ${BIN_PATH}

@@ -22,11 +22,11 @@ class WrongAnimal
       WrongAnimal(void);
       WrongAnimal(std::string name);
       WrongAnimal(WrongAnimal const & src);
-      virtual ~WrongAnimal(void);
+      ~WrongAnimal(void);
  
       WrongAnimal &  operator=(WrongAnimal const & rhs);
  
-      virtual void  makeSound(void) const;
+      void  makeSound(void) const;
       std::string   getType(void) const;
       
    protected :

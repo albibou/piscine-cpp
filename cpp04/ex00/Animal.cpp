@@ -40,6 +40,7 @@ Animal::~Animal(void){
 Animal & Animal::operator=(Animal const & rhs){
  
    this->type = rhs.type;
+   std::cout << "Animal assignation operator called" << std::endl;
    return *this;
 }
 
