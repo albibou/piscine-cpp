@@ -27,8 +27,6 @@ SRC	= ./main.cpp \
 	  ./Dog.cpp \
 	  ./Cat.cpp \
 	  ./Brain.cpp \
-	  ./WrongAnimal.cpp \
-	  ./WrongCat.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

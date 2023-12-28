@@ -16,6 +16,8 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
+#define STD_CATIDEA "Human you suckers"
+
 class Cat : public Animal
 {
    public:

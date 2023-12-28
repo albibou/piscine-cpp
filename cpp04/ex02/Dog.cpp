@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 18:11:37 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 18:11:38 by atardif          ###   ########.fr       */
+/*   Created: 2023/12/16 18:08:36 by atardif           #+#    #+#             */
+/*   Updated: 2023/12/16 18:08:41 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,41 @@
 
 Dog::Dog(void) : Aanimal("Dog"){
  
-    _brain = new Brain[100];
+    _brain = new Brain;
+    for (int i = 0; i < 100; i++)
+        _brain->ideas[i] = STD_DOGIDEA; 
     std::cout << "Default Dog Constructor Called" << std::endl;
     return ;
 }
  
-Dog::Dog(Dog const & src){
- 
-    *this = src;
+Dog::Dog(Dog const & src) : Aanimal("Dog"){
+
+    this->type = src.type;
+    if (src._brain == NULL)
+        this->_brain = NULL;
+    else
+        this->_brain = new Brain(*src._brain);
     std::cout << "Copy Dog Constructor Called" << std::endl;
     return ;
 }
  
 Dog::~Dog(void){
- 
-    delete[] _brain;
+
+    delete _brain;
     std::cout << "Default Dog Destructor Called" << std::endl;
     return ;
 }
  
 Dog & Dog::operator=(Dog const & rhs){
- 
-   this->type = rhs.type;
-   this->_brain = new Brain[100];
-   this->_brain = rhs._brain;
-   return *this;
+    
+    this->type = rhs.type;
+    delete this->_brain;
+    if (rhs._brain == NULL)
+        this->_brain = NULL;
+    else
+        this->_brain = new Brain(*rhs._brain);
+    std::cout << "Dog assignation operator Called" << std::endl;
+    return *this;
 }
 
 void    Dog::makeSound(void) const{
@@ -72,6 +82,6 @@ void    Dog::displayanIdea(int index) const{
         std::cout << "Please provide index values between 1 and 100" << std::endl;
         return ;
     }
-    std::cout << std::endl << "Idea n " << index + 1 << " " << this->_brain->ideas[index] << std::endl << std::endl; 
+    std::cout << "Idea n " << index + 1 << " " << this->_brain->ideas[index] << std::endl; 
     return;
 }

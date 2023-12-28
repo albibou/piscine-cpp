@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 18:11:22 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 18:11:23 by atardif          ###   ########.fr       */
+/*   Created: 2023/12/16 18:07:26 by atardif           #+#    #+#             */
+/*   Updated: 2023/12/16 18:07:27 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ class Brain
       std::string   ideas[100];
 
    private:
-
-      //std::string   _ideas[100];
-
 };
 #endif // BRAIN_H
 

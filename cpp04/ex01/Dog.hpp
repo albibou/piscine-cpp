@@ -16,6 +16,8 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
+#define STD_DOGIDEA "Thanks human for domesticating my entire specie !"
+
 class Dog : public Animal
 {
    public:

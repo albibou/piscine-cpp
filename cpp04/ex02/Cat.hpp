@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 18:11:33 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 18:11:34 by atardif          ###   ########.fr       */
+/*   Created: 2023/12/16 18:08:31 by atardif           #+#    #+#             */
+/*   Updated: 2023/12/16 18:08:32 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
  
 #include "Aanimal.hpp"
 #include "Brain.hpp"
+
+#define STD_CATIDEA "Human you suckers"
 
 class Cat : public Aanimal
 {
@@ -26,7 +28,7 @@ class Cat : public Aanimal
  
       Cat &  operator=(Cat const & rhs);
  
-      void  makeSound(void) const;
+      virtual void  makeSound(void) const;
       void  fillIdea(std::string idea, int index);
       void  displayIdeas(void) const;
       void  displayanIdea(int index) const;

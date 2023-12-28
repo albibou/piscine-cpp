@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 18:09:47 by atardif           #+#    #+#             */
-/*   Updated: 2023/12/16 18:09:49 by atardif          ###   ########.fr       */
+/*   Created: 2023/12/16 18:07:20 by atardif           #+#    #+#             */
+/*   Updated: 2023/12/16 18:07:21 by atardif          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
  
 Brain::Brain(void){
  
-    //std::cout << "Default Brain contructor called" << std::endl;
+    std::cout << "Default Brain contructor called" << std::endl;
     return ;
 }
  
@@ -27,15 +27,16 @@ Brain::Brain(Brain const & src){
  
 Brain::~Brain(void){
  
-    //std::cout << "Default Brain destructor called" << std::endl;
-   return ;
+    std::cout << "Default Brain destructor called" << std::endl;
+    return ;
 }
  
 Brain & Brain::operator=(Brain const & rhs){
 
     for(int i = 0; i < 100; i++)
         this->ideas[i] = rhs.ideas[i];
-   return *this;
+    std::cout << "Brain assignation operator called" << std::endl;
+    return *this;
 }
 
 

@@ -5,7 +5,7 @@ NAME = worldonfire
 # Compiler
 
 CXX	= clang++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -gdwarf-4 
 
 # Paths
 
@@ -27,8 +27,6 @@ SRC	= ./main.cpp \
 	  ./Dog.cpp \
 	  ./Cat.cpp \
 	  ./Brain.cpp \
-	  ./WrongAnimal.cpp \
-	  ./WrongCat.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
