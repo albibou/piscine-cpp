@@ -4,8 +4,8 @@ NAME = abstract
 
 # Compiler
 
-CXX	= clang++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+CXX	= g++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -gdwarf-4
 
 # Paths
 
@@ -23,12 +23,10 @@ RM	= rm -rf
 # Files
 
 SRC	= ./main.cpp \
-	  ./Aanimal.cpp \
-	  ./Dog.cpp \
-	  ./Cat.cpp \
-	  ./Brain.cpp \
-	  ./WrongAnimal.cpp \
-	  ./WrongCat.cpp \
+	  ./AMateria.cpp \
+	  ./Ice.cpp \
+	  ./Cure.cpp \
+	  ./Character.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

@@ -18,7 +18,7 @@ Cure::Cure(void) : AMateria("cure"){
     return ;
 }
  
-Cure::Cure(Cure const & src){
+Cure::Cure(Cure const & src) : AMateria(src){
  
     std::cout << "Copy Cure Constructor called" << std::endl; 
     return ;
@@ -31,21 +31,20 @@ Cure::~Cure(void){
 }
  
 Cure & Cure::operator=(Cure const & rhs){
- 
-    this->type = rhs.type;
-    //this->default = rhs->default;
+
+    (void)rhs;
+    std::cout << "Cure objects are always of the same type so assignation is useless" << std::endl;
     return *this;
 }
 
-Cure*    Cure::clone(void) const{
+AMateria*    Cure::clone(void) const{
 
-    Cure *clone = new Cure();
-    *clone = *this;
+    AMateria *clone = new Cure();
     return clone;
 }
 
 void    Cure::use(ICharacter& target){
 
-    std::cout << "* heals " << target.name << " 's wounds *" << std::endl;
+    std::cout << "* heals " << target.getName() << " 's wounds *" << std::endl;
     return ;
 }

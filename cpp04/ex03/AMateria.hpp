@@ -14,6 +14,9 @@
 # define AMATERIA_H
  
 #include <string>
+#include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria
 {
@@ -22,7 +25,7 @@ class AMateria
        AMateria(void);
        AMateria(std::string const & type);
        AMateria(AMateria const & src);
-       ~AMateria(void);
+       virtual ~AMateria(void);
  
        AMateria &  operator=(AMateria const & rhs);
  
@@ -33,7 +36,7 @@ class AMateria
 
    protected:
        
-       std::string type;
+       std::string const _type;
  
    private:
  

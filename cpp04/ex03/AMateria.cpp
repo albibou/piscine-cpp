@@ -12,45 +12,45 @@
 
 #include "AMateria.hpp"
  
-AMateria::AMateria(void){
+AMateria::AMateria(void) : _type("Default"){
  
-    std::cout << "Default Constructor called" << std::endl; 
+    std::cout << "Default AMateria Constructor called" << std::endl; 
     return ;
 }
  
-AMateria::AMateria(AMateria const & src){
+AMateria::AMateria(std::string const & type) : _type(type){
+
+    std::cout << "Parametric AMateria Constructor called" << std::endl;
+    return ;
+}
+
+AMateria::AMateria(AMateria const & src) : _type(src.getType()){
  
-    *this = src;
-    std::cout << "Copy Constructor called" << std::endl; 
+    std::cout << "Copy AMateria Constructor called" << std::endl; 
     return ;
 }
  
 AMateria::~AMateria(void){
  
-    std::cout << "Default Destructor called" << std::endl; 
+    std::cout << "Default AMateria Destructor called" << std::endl; 
     return ;
 }
  
 AMateria & AMateria::operator=(AMateria const & rhs){
- 
-    this->type = rhs.type;
+
+    (void)rhs;
+    std::cout << "AMateria objects are always of the same type so assignation is useless" << std::endl;
     return *this;
 }
 
 std::string const & AMateria::getType(void) const {
 
-    return this->type;
-}
-
-AMateria *  AMateria::clone(void) const {
-
-    AMateria    *clone = new AMateria();
-    *clone = *this;
-    return clone;
+    return this->_type;
 }
 
 void    AMateria::use(ICharacter& target){
 
-    // See it later
+    (void)target;
+    std::cout << "There's no interest in using an AMateria" << std::endl;
     return ;
 }

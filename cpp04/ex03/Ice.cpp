@@ -18,9 +18,8 @@ Ice::Ice(void) : AMateria("ice"){
     return ;
 }
  
-Ice::Ice(Ice const & src){
+Ice::Ice(Ice const & src) : AMateria(src){
  
-    *this = src;
     std::cout << "Copy Ice Constructor called" << std::endl; 
     return ;
 }
@@ -32,20 +31,20 @@ Ice::~Ice(void){
 }
  
 Ice & Ice::operator=(Ice const & rhs){
- 
-    this->type = rhs.type;
+
+    (void)rhs;
+    std::cout << "Ice objects are always of the same type so assignation is useless" << std::endl;
     return *this;
 }
 
-Ice*    Ice::clone(void) const{
+AMateria*    Ice::clone(void) const{
 
-    Ice *clone = new Ice();
-    *clone = *this;
+    AMateria *clone = new Ice();
     return clone;
 }
 
 void    Ice::use(ICharacter& target){
 
-    std::cout << "* shoots an ice bolt at " << target.name << " *" << std::endl;
+    std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
     return ;
 }
