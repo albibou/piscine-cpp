@@ -4,8 +4,8 @@ NAME = worldonfire
 
 # Compiler
 
-CXX	= clang++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -gdwarf-4 
+CXX	= c++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
 

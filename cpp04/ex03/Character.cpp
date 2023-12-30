@@ -76,6 +76,11 @@ std::string const & Character::getName(void) const{
 
 void    Character::equip(AMateria* m){
 
+    if(m == NULL)
+    {
+        std::cout << this->_name << " can't equip NULL materiae." << std::endl;
+        return ;
+    }
     int i;
     for (i = 0; i < 4; i++)
     {
@@ -85,8 +90,11 @@ void    Character::equip(AMateria* m){
             break;       
         }
     }
-    if (i >= 4)
+    if (i == 4)
+    {
         std::cout << "Inventory of " << this->_name << " is full. Unequip materiae and try again." << std::endl;
+        delete m;
+    }
     else
         std::cout << "Materia with type " << m->getType() << " has been equip in the slot " << i << " of " << this->_name << "'s inventory." << std::endl;
     return ;
@@ -102,7 +110,7 @@ void    Character::unequip(int idx){
     int    i;
     for (i = 0; i < 4; i++)
     {
-        if (i == idx)
+        if (i == idx && _materiae[i])
         {
             std::cout << "Materia with type " << _materiae[i]->getType() << " has been unequiped from slot " << i << " of " << this->_name << "'s inventory." << std::endl;
             this->_materiae[i] = NULL;
@@ -124,4 +132,16 @@ void    Character::use(int idx, ICharacter& target){
     else
         std::cout << "Character " << this->_name << " does not have any equipment on slot " << idx << " ." << std::endl;
     return ;
+}
+
+AMateria*        Character::getMateria(int i) const{
+
+    if (i < 0 || i > 3)
+    {
+        std::cout << "Index must be between 0 and 3, try again" << std::endl;
+        return NULL;
+    }
+    if (this->_materiae[i])
+        return this->_materiae[i];
+    return (NULL);
 }

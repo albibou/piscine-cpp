@@ -12,17 +12,18 @@
 
 #ifndef IMATERIASOURCE_H
 # define IMATERIASOURCE_H
- 
+
+# include <string>
+# include "AMateria.hpp" 
+
 class IMateriaSource
 {
     public:
  
-       IMateriaSource(void);
-       IMateriaSource(IMateriaSource const & src);
-       ~IMateriaSource(void);
- 
-       IMateriaSource &  operator=(IMateriaSource const & rhs);
- 
+       virtual ~IMateriaSource(void) {};
+       virtual void learnMateria(AMateria*) = 0;
+       virtual AMateria * createMateria(std::string const & type) = 0;
+
    protected:
  
    private:

@@ -4,8 +4,8 @@ NAME = abstract
 
 # Compiler
 
-CXX	= g++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -gdwarf-4
+CXX	= c++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
 
@@ -27,6 +27,7 @@ SRC	= ./main.cpp \
 	  ./Ice.cpp \
 	  ./Cure.cpp \
 	  ./Character.cpp \
+	  ./MateriaSource.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
