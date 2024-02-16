@@ -44,10 +44,6 @@ ${NAME} :	${OBJ}
 	
 all :		${NAME}
 
-print : ${PRINTNAME}
-
-debug : ${DEBUGNAME}
-
 clean :
 		${RM} ${OBJ} ${DEPS} ${BIN_PATH}
 
