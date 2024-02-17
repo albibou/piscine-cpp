@@ -23,11 +23,6 @@ class IMateriaSource
        virtual ~IMateriaSource(void) {};
        virtual void learnMateria(AMateria*) = 0;
        virtual AMateria * createMateria(std::string const & type) = 0;
-
-   protected:
- 
-   private:
- 
 };
 #endif // IMATERIASOURCE_H
 

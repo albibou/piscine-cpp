@@ -22,7 +22,7 @@ class WrongAnimal
       WrongAnimal(void);
       WrongAnimal(std::string name);
       WrongAnimal(WrongAnimal const & src);
-      ~WrongAnimal(void);
+      virtual ~WrongAnimal(void);
  
       WrongAnimal &  operator=(WrongAnimal const & rhs);
  
@@ -31,7 +31,7 @@ class WrongAnimal
       
    protected :
 
-      std::string   type;
+      std::string   _type;
 
    private:
 };

@@ -1,11 +1,11 @@
 # Project
 
-NAME = interface
+NAME = form
 
 # Compiler
 
-CXX	= c++
-CFLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+CXX	= g++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
 
@@ -23,25 +23,22 @@ RM	= rm -rf
 # Files
 
 SRC	= ./main.cpp \
-	  ./AMateria.cpp \
-	  ./Ice.cpp \
-	  ./Cure.cpp \
-	  ./Character.cpp \
-	  ./MateriaSource.cpp \
+	  ./Bureaucrat.cpp \
+	  ./Form.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
 DEPS		= $(OBJ:.o=.d)
 
 .c.o :	
-		${CXX} ${CFLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
+		${CXX} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 		mkdir -p $(dir $@)
-		@ $(CXX) $(CFLAGS) -c $< -o $@
+		@ $(CXX) $(FLAGS) -c $< -o $@
 
 ${NAME} :	${OBJ}
-		${CXX} -o ${NAME} -g ${CFLAGS} ${OBJ} 
+		${CXX} -o ${NAME} ${FLAGS} ${OBJ} 
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	

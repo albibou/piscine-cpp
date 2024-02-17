@@ -12,13 +12,13 @@
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void) : type("Default"){
+WrongAnimal::WrongAnimal(void) : _type("Default"){
  
     std::cout << "Default WrongAnimal Constructor Called" << std::endl;
     return ;
 }
  
-WrongAnimal::WrongAnimal(std::string name) : type(name){
+WrongAnimal::WrongAnimal(std::string name) : _type(name){
  
     std::cout << "Type WrongAnimal Constructor Called" << std::endl;
     return ;
@@ -39,7 +39,7 @@ WrongAnimal::~WrongAnimal(void){
  
 WrongAnimal & WrongAnimal::operator=(WrongAnimal const & rhs){
  
-   this->type = rhs.type;
+   this->_type = rhs._type;
    return *this;
 }
 
@@ -51,5 +51,5 @@ void    WrongAnimal::makeSound(void) const{
 
 std::string WrongAnimal::getType(void) const{
 
-    return this->type;
+    return this->_type;
 }

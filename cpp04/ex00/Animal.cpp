@@ -12,13 +12,13 @@
 
 #include "Animal.hpp"
  
-Animal::Animal(void) : type("Default"){
+Animal::Animal(void) : _type("Default"){
  
     std::cout << "Default Animal Constructor Called" << std::endl;
     return ;
 }
  
-Animal::Animal(std::string name) : type(name){
+Animal::Animal(std::string name) : _type(name){
  
     std::cout << "Type Animal Constructor Called" << std::endl;
     return ;
@@ -39,14 +39,14 @@ Animal::~Animal(void){
  
 Animal & Animal::operator=(Animal const & rhs){
  
-   this->type = rhs.type;
+   this->_type = rhs._type;
    std::cout << "Animal assignation operator called" << std::endl;
    return *this;
 }
 
 std::string Animal::getType(void) const{
 
-    return this->type;
+    return this->_type;
 }
 
 void    Animal::makeSound(void) const{

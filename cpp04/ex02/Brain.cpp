@@ -14,14 +14,14 @@
  
 Brain::Brain(void){
  
-    std::cout << "Default Brain contructor called" << std::endl;
+    std::cout << "Default Brain Constructor called" << std::endl;
     return ;
 }
  
 Brain::Brain(Brain const & src){
  
     *this = src;
-    std::cout << "Copy Brain contructor called" << std::endl;
+    std::cout << "Copy Brain Constructor called" << std::endl;
     return ;
 }
  

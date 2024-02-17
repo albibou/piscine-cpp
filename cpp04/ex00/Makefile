@@ -5,7 +5,7 @@ NAME = polymorphism
 # Compiler
 
 CXX	= c++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+CFLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths
 
@@ -34,14 +34,14 @@ OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 DEPS		= $(OBJ:.o=.d)
 
 .c.o :	
-		${CXX} ${FLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
+		${CXX} ${CFLAGS} -I ${INCLUDES} -c $< -o ${<:.cpp=.o}
 
 $(BIN_PATH)%.o: $(SRC_PATH)%.cpp
 		mkdir -p $(dir $@)
-		@ $(CXX) $(FLAGS) -c $< -o $@
+		@ $(CXX) $(CFLAGS) -c $< -o $@
 
 ${NAME} :	${OBJ}
-		${CXX} -o ${NAME} -g ${FLAGS} ${OBJ} 
+		${CXX} -o ${NAME} -g ${CFLAGS} ${OBJ} 
 		clear
 	        @toilet -f pagga.tlf --gay "Enjoy ${NAME} !"
 	
