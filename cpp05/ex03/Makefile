@@ -28,6 +28,7 @@ SRC	= ./main.cpp \
 	  ./PresidentialPardonForm.cpp \
 	  ./ShrubberyCreationForm.cpp \
 	  ./RobotomyRequestForm.cpp \
+	  ./Intern.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

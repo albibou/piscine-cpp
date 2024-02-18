@@ -1,31 +1,31 @@
-#include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 ////////////////////////////////////////////////////////////////////
 ///                 Constructors, Destructors                    ///
 ////////////////////////////////////////////////////////////////////
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm::AForm("Shrubbery Creation Form", 145, 137), _target("home"){
+PresidentialPardonForm::PresidentialPardonForm(void) : AForm::AForm("Presidential Pardon Form", 25, 5), _target("home"){
 
   if (PRINT)
     std::cout << "Default constructor called" << std::endl;
   return ;
 } 
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm::AForm("Shrubbery Creation Form", 145, 137), _target(target){
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm::AForm("Presidential Pardon Form", 25, 5), _target(target){
 
   if (PRINT)
     std::cout << "Parametric constructor called" << std::endl;
   return ;
 } 
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
 
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
   return ;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(void){
+PresidentialPardonForm::~PresidentialPardonForm(void){
 
   if (PRINT)
     std::cout << "Default destructor called" << std::endl;
@@ -36,7 +36,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void){
 ///                       Operator overloads                     ///
 ////////////////////////////////////////////////////////////////////
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs){
+PresidentialPardonForm & PresidentialPardonForm::operator=(PresidentialPardonForm const & rhs){
 
   if (this != &rhs) 
   {
@@ -48,7 +48,7 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm c
   return *this;
 }
 
-std::ostream & operator<<(std::ostream & o, ShrubberyCreationForm const & rhs){
+std::ostream & operator<<(std::ostream & o, PresidentialPardonForm const & rhs){
 
   o << "Form : " << rhs.getName();
   if (rhs.getIsSigned())
@@ -66,7 +66,7 @@ std::ostream & operator<<(std::ostream & o, ShrubberyCreationForm const & rhs){
 ///                        Getters/Setters                       ///
 ////////////////////////////////////////////////////////////////////
 
-std::string   ShrubberyCreationForm::getTarget(void) const{
+std::string   PresidentialPardonForm::getTarget(void) const{
 
   return this->_target;
 } 
@@ -75,40 +75,19 @@ std::string   ShrubberyCreationForm::getTarget(void) const{
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////
 
-void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
+void          PresidentialPardonForm::execute(Bureaucrat const & executor) const{
 
   try {
 
-    checkFormExecRequirements(executor);
-    std::ofstream newfile;
-
-    newfile.open(_target.c_str(), std::fstream:out);
-    if (!newfile.is_open())
-      throw FileOpeningException();
-    newfile <<                ,@@@@@@@,
-       ,,,.   ,@@@@@@/@@,  .oo8888o.
-    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
-   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
-   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
-   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
-   `&%\ ` /%&'    |.|        \ '|8'
-       |o|        | |         | |
-       |.|        | |         | |
-    \\/ ._\\/_/__/  ,\_\/__\\/.  \_\/__/_;
-   return (void)(newfile.close()) 
+    checkFormExecRequirements();
+    std::cout << _target << " has been pardoned by Zaphod Beeblebrox";
   }
   catch (const std::exception& e){
 
     std::cerr << e.what() << std::endl;
-  } 
+  }
 }
 
 ////////////////////////////////////////////////////////////////////
 ///                        Exceptions                            ///
 ////////////////////////////////////////////////////////////////////
-
-const char *  ShrubberyCreationForm::FileOpeningException::what() const throw() {
-
-  return "Error opening File !";
-}
-

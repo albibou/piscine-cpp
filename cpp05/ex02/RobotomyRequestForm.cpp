@@ -1,31 +1,34 @@
-#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 ////////////////////////////////////////////////////////////////////
 ///                 Constructors, Destructors                    ///
 ////////////////////////////////////////////////////////////////////
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm::AForm("Shrubbery Creation Form", 145, 137), _target("home"){
+RobotomyRequestForm::RobotomyRequestForm(void) : AForm::AForm("Robotomy Request Form", 72, 45), _target("home"){
 
+  _ratio = 1;
   if (PRINT)
     std::cout << "Default constructor called" << std::endl;
   return ;
 } 
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm::AForm("Shrubbery Creation Form", 145, 137), _target(target){
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm::AForm("Robotomy Request Form", 72, 45), _target(target){
 
+  _ratio = 1;
   if (PRINT)
     std::cout << "Parametric constructor called" << std::endl;
   return ;
 } 
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
 
+  _ratio = rhs
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
   return ;
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm(void){
+RobotomyRequestForm::~RobotomyRequestForm(void){
 
   if (PRINT)
     std::cout << "Default destructor called" << std::endl;
@@ -36,7 +39,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void){
 ///                       Operator overloads                     ///
 ////////////////////////////////////////////////////////////////////
 
-ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs){
+RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const & rhs){
 
   if (this != &rhs) 
   {
@@ -48,7 +51,7 @@ ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm c
   return *this;
 }
 
-std::ostream & operator<<(std::ostream & o, ShrubberyCreationForm const & rhs){
+std::ostream & operator<<(std::ostream & o, RobotomyRequestForm const & rhs){
 
   o << "Form : " << rhs.getName();
   if (rhs.getIsSigned())
@@ -66,36 +69,37 @@ std::ostream & operator<<(std::ostream & o, ShrubberyCreationForm const & rhs){
 ///                        Getters/Setters                       ///
 ////////////////////////////////////////////////////////////////////
 
-std::string   ShrubberyCreationForm::getTarget(void) const{
+std::string   RobotomyRequestForm::getTarget(void) const{
 
   return this->_target;
+} 
+
+std::string   RobotomyRequestForm::getRatio(void) const{
+
+  return this->_ratio;
 } 
 
 ////////////////////////////////////////////////////////////////////
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////
 
-void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
+void          RobotomyRequestForm::execute(Bureaucrat const & executor) const{
 
   try {
 
     checkFormExecRequirements(executor);
-    std::ofstream newfile;
 
-    newfile.open(_target.c_str(), std::fstream:out);
-    if (!newfile.is_open())
-      throw FileOpeningException();
-    newfile <<                ,@@@@@@@,
-       ,,,.   ,@@@@@@/@@,  .oo8888o.
-    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
-   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
-   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
-   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
-   `&%\ ` /%&'    |.|        \ '|8'
-       |o|        | |         | |
-       |.|        | |         | |
-    \\/ ._\\/_/__/  ,\_\/__\\/.  \_\/__/_;
-   return (void)(newfile.close()) 
+    std::cout << "Drilling Noises :" << std::endl;
+    std::cout << "Brrrr Btttt Brt Btr BRrrrrrrR !!! " << std::endl;
+    if (_ratio == 1)
+    {
+      std::cout << _target << " has been succesfully robotomized!"
+      _ratio++;
+    }
+    else {
+      std::cout << _target << "'s robotomy failed..."
+      _ratio--;
+    }
   }
   catch (const std::exception& e){
 
@@ -106,9 +110,3 @@ void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 ////////////////////////////////////////////////////////////////////
 ///                        Exceptions                            ///
 ////////////////////////////////////////////////////////////////////
-
-const char *  ShrubberyCreationForm::FileOpeningException::what() const throw() {
-
-  return "Error opening File !";
-}
-
