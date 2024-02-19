@@ -21,11 +21,6 @@ class PresidentialPardonForm : public AForm{
     std::string   getTarget(void) const;
     void          execute(Bureaucrat const & executor) const;
 
-    //class FileOpeningException : public std::exception{
-
-      public :
-        const char * what() const throw();
-    }; 
 
   private :
 

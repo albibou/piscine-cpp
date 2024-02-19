@@ -6,7 +6,6 @@
 
 RobotomyRequestForm::RobotomyRequestForm(void) : AForm::AForm("Robotomy Request Form", 72, 45), _target("home"){
 
-  _ratio = 1;
   if (PRINT)
     std::cout << "Default constructor called" << std::endl;
   return ;
@@ -14,15 +13,13 @@ RobotomyRequestForm::RobotomyRequestForm(void) : AForm::AForm("Robotomy Request 
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm::AForm("Robotomy Request Form", 72, 45), _target(target){
 
-  _ratio = 1;
   if (PRINT)
     std::cout << "Parametric constructor called" << std::endl;
   return ;
 } 
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const & rhs) : AForm::AForm(rhs), _target(rhs._target){
 
-  _ratio = rhs
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
   return ;
@@ -42,10 +39,7 @@ RobotomyRequestForm::~RobotomyRequestForm(void){
 RobotomyRequestForm & RobotomyRequestForm::operator=(RobotomyRequestForm const & rhs){
 
   if (this != &rhs) 
-  {
     this->_target = rhs.getTarget();
-    this->_isSigned = rhs.getIsSigned();
-  }
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
   return *this;
@@ -74,11 +68,6 @@ std::string   RobotomyRequestForm::getTarget(void) const{
   return this->_target;
 } 
 
-std::string   RobotomyRequestForm::getRatio(void) const{
-
-  return this->_ratio;
-} 
-
 ////////////////////////////////////////////////////////////////////
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////
@@ -91,15 +80,11 @@ void          RobotomyRequestForm::execute(Bureaucrat const & executor) const{
 
     std::cout << "Drilling Noises :" << std::endl;
     std::cout << "Brrrr Btttt Brt Btr BRrrrrrrR !!! " << std::endl;
-    if (_ratio == 1)
-    {
-      std::cout << _target << " has been succesfully robotomized!"
-      _ratio++;
-    }
-    else {
-      std::cout << _target << "'s robotomy failed..."
-      _ratio--;
-    }
+    if (rand() & 1)
+      std::cout << _target << " has been succesfully robotomized!" << std::endl;
+    else 
+      std::cout << _target << "'s robotomy failed..." << std::endl;
+    
   }
   catch (const std::exception& e){
 

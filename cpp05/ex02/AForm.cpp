@@ -99,7 +99,7 @@ void          AForm::beSigned(Bureaucrat const & bureaucrat){
 
 void          AForm::checkFormExecRequirements(Bureaucrat const & executor) const{
 
-  if (!this->_signed)
+  if (!this->_isSigned)
     throw FormIsNotSignedException();
   if (executor.getGrade() > this->_gradeToExec)
     throw GradeTooLowException();

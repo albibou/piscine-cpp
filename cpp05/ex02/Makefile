@@ -1,6 +1,6 @@
 # Project
 
-NAME = form
+NAME = moreforms
 
 # Compiler
 
