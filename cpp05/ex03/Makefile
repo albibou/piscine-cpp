@@ -1,6 +1,6 @@
 # Project
 
-NAME = moreforms
+NAME = intern
 
 # Compiler
 

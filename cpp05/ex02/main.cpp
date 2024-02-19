@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/19 19:55:57 by atardif           #+#    #+#             */
+/*   Updated: 2024/02/19 19:55:59 by atardif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -75,6 +87,8 @@ int main(void){
 
     std::cout << std::endl << "Test with signed form and high-graded bureaucrat "  << std::endl;
     bureaucrat1.executeForm(form3);
+
+    
   }
   catch (std::exception const & e){
 
