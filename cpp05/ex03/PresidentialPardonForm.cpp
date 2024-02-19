@@ -18,7 +18,7 @@ PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm::AFor
   return ;
 } 
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const & rhs) : AForm::AForm(rhs), _target(rhs._target){
 
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
@@ -39,10 +39,7 @@ PresidentialPardonForm::~PresidentialPardonForm(void){
 PresidentialPardonForm & PresidentialPardonForm::operator=(PresidentialPardonForm const & rhs){
 
   if (this != &rhs) 
-  {
     this->_target = rhs.getTarget();
-    this->_isSigned = rhs.getIsSigned();
-  }
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
   return *this;
@@ -79,15 +76,17 @@ void          PresidentialPardonForm::execute(Bureaucrat const & executor) const
 
   try {
 
-    checkFormExecRequirements();
-    std::cout << _target << " has been pardoned by Zaphod Beeblebrox";
+    checkFormExecRequirements(executor);
+    std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
   }
-  catch (const std::exception& e){
-
-    std::cerr << e.what() << std::endl;
+  catch (const AForm::FormIsNotSignedException& e){
+    throw AForm::FormIsNotSignedException();
+  }
+  catch (const AForm::GradeTooHighException& e){
+    throw AForm::GradeTooHighException();
   }
 }
 
 ////////////////////////////////////////////////////////////////////
 ///                        Exceptions                            ///
-////////////////////////////////////////////////////////////////////
+/////////////////a//////////////////////////////////////////////////

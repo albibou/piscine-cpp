@@ -18,7 +18,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm::AForm(
   return ;
 } 
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & rhs) : _name(rhs._name), _isSigned(rhs._isSigned), _gradeToSign(rhs._gradeToSign), _gradeToExec(rhs._gradeToExec), _target(rhs._target){
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const & rhs) : AForm::AForm(rhs), _target(rhs.getTarget()){
 
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
@@ -39,10 +39,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void){
 ShrubberyCreationForm & ShrubberyCreationForm::operator=(ShrubberyCreationForm const & rhs){
 
   if (this != &rhs) 
-  {
     this->_target = rhs.getTarget();
-    this->_isSigned = rhs.getIsSigned();
-  }
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
   return *this;
@@ -82,25 +79,27 @@ void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
     checkFormExecRequirements(executor);
     std::ofstream newfile;
 
-    newfile.open(_target.c_str(), std::fstream:out);
+    newfile.open(_target.c_str(), std::fstream::out);
     if (!newfile.is_open())
       throw FileOpeningException();
-    newfile <<                ,@@@@@@@,
-       ,,,.   ,@@@@@@/@@,  .oo8888o.
-    ,&%%&%&&%,@@@@@/@@@@@@,8888\88/8o
-   ,%&\%&&%&&%,@@@\@@@/@@@88\88888/88'
-   %&&%&%&/%&&%@@\@@/ /@@@88888\88888'
-   %&&%/ %&%%&&@@\ V /@@' `88\8 `/88'
-   `&%\ ` /%&'    |.|        \ '|8'
-       |o|        | |         | |
-       |.|        | |         | |
-    \\/ ._\\/_/__/  ,\_\/__\\/.  \_\/__/_;
-   return (void)(newfile.close()) 
+    newfile << "               ,@@@@@@@," << std::endl;
+    newfile << "       ,,,.   ,@@@@@@/@@,  .oo8888o." << std::endl;
+    newfile << "    ,&%&&%&&%,@@@@@/@@@@@@,8888/88/8o" << std::endl;
+    newfile << "   ,%&/%&&%&&%,@@@/@@@/@@@88/88888/88'" << std::endl;
+    newfile << "   %&&%&%&/%&&%@@/@@/ /@@@88888/88888'" << std::endl;
+    newfile << "   %&&%/ %&&%&&@@/ V /@@' `88/8 `/88'" << std::endl;
+    newfile << "   `&%/ ` /%&'    |.|        / '|8'" << std::endl;
+    newfile << "       |o|        | |         | |" << std::endl;
+    newfile << "       |.|        | |         | |" << std::endl;
+    newfile << "    /// ._///_/__/  ,/_//__///.  /_//__/_" << std::endl;
+   return (void)(newfile.close());
   }
-  catch (const std::exception& e){
-
-    std::cerr << e.what() << std::endl;
-  } 
+  catch (const AForm::FormIsNotSignedException& e){
+    throw AForm::FormIsNotSignedException();
+  }
+  catch (const AForm::GradeTooHighException& e){
+    throw AForm::GradeTooHighException();
+  }
 }
 
 ////////////////////////////////////////////////////////////////////

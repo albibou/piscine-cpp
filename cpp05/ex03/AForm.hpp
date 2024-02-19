@@ -2,7 +2,9 @@
 # define AFORM_H
 
 # include <iostream>
+# include <fstream>
 # include <string>
+# include <cstdlib>
 # include "Bureaucrat.hpp"
 
 class Bureaucrat;
@@ -24,7 +26,7 @@ class AForm{
     unsigned int            getGradeToExec(void) const;
 
     void              beSigned(Bureaucrat const & bureaucrat);
-    void              checkFormExecRequirements(Bureaucrat executor) const;
+    void              checkFormExecRequirements(Bureaucrat const & executor) const;
 
     virtual void      execute(Bureaucrat const & executor) const = 0;
 

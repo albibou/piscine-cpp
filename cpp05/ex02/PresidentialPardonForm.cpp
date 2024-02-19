@@ -77,14 +77,16 @@ void          PresidentialPardonForm::execute(Bureaucrat const & executor) const
   try {
 
     checkFormExecRequirements(executor);
-    std::cout << _target << " has been pardoned by Zaphod Beeblebrox";
+    std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
   }
-  catch (const std::exception& e){
-
-    std::cerr << e.what() << std::endl;
+  catch (const AForm::FormIsNotSignedException& e){
+    throw AForm::FormIsNotSignedException();
+  }
+  catch (const AForm::GradeTooHighException& e){
+    throw AForm::GradeTooHighException();
   }
 }
 
 ////////////////////////////////////////////////////////////////////
 ///                        Exceptions                            ///
-////////////////////////////////////////////////////////////////////
+/////////////////a//////////////////////////////////////////////////

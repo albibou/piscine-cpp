@@ -94,10 +94,12 @@ void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
     newfile << "    /// ._///_/__/  ,/_//__///.  /_//__/_" << std::endl;
    return (void)(newfile.close());
   }
-  catch (const std::exception& e){
-
-    std::cerr << e.what() << std::endl;
-  } 
+  catch (const AForm::FormIsNotSignedException& e){
+    throw AForm::FormIsNotSignedException();
+  }
+  catch (const AForm::GradeTooHighException& e){
+    throw AForm::GradeTooHighException();
+  }
 }
 
 ////////////////////////////////////////////////////////////////////

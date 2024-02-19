@@ -102,7 +102,7 @@ void          AForm::checkFormExecRequirements(Bureaucrat const & executor) cons
   if (!this->_isSigned)
     throw FormIsNotSignedException();
   if (executor.getGrade() > this->_gradeToExec)
-    throw GradeTooLowException();
+    throw GradeTooHighException();
 }
 
 ////////////////////////////////////////////////////////////////////

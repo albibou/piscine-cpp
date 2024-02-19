@@ -86,10 +86,12 @@ void          RobotomyRequestForm::execute(Bureaucrat const & executor) const{
       std::cout << _target << "'s robotomy failed..." << std::endl;
     
   }
-  catch (const std::exception& e){
-
-    std::cerr << e.what() << std::endl;
-  } 
+  catch (const AForm::FormIsNotSignedException& e){
+    throw AForm::FormIsNotSignedException();
+  }
+  catch (const AForm::GradeTooHighException& e){
+    throw AForm::GradeTooHighException();
+  }
 }
 
 ////////////////////////////////////////////////////////////////////

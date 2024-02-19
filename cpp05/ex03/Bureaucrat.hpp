@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <string>
-# include "Form.hpp"
+# include "AForm.hpp"
 
 # ifndef PRINT
 #  define PRINT 0
@@ -12,7 +12,7 @@
 # define LOWEST_GRADE 150
 # define HIGHEST_GRADE 1
 
-class Form;
+class AForm;
 
 class Bureaucrat{
 
@@ -30,7 +30,7 @@ class Bureaucrat{
 
     void              incrementGrade(void);
     void              decrementGrade(void);
-    void              signForm(Form & form);
+    void              signForm(AForm & form);
     void              executeForm(AForm const & form);
 
     class GradeTooHighException : public std::exception{

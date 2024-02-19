@@ -1,10 +1,10 @@
 # Project
 
-NAME = form
+NAME = moreforms
 
 # Compiler
 
-CXX	= g++
+CXX	= c++
 FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
 
 # Paths

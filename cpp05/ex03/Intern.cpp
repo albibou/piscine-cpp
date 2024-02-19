@@ -14,7 +14,6 @@ Intern::Intern(void){
 Intern::Intern(Intern const & rhs){
 
   (void)rhs;
-  //insert assignation
   if (PRINT)
     std::cout << "Copy constructor called" << std::endl;
   return ;
@@ -33,10 +32,6 @@ Intern::~Intern(void){
 
 Intern & Intern::operator=(Intern const & rhs){
 
-  if (this != &rhs) 
-  {
-    //insert assignation
-  }
   (void)rhs;
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
@@ -46,7 +41,6 @@ Intern & Intern::operator=(Intern const & rhs){
 std::ostream & operator<<(std::ostream & o, Intern const & rhs){
 
   (void)rhs;
-  /*o << insert output desired*/;
   return o;
 }
 
@@ -62,7 +56,10 @@ AForm *   Intern::makeForm(std::string name, std::string target){
 
   std::string formNames[3] = {"Robotomy Request Form", "Presidential Pardon Form", "Shrubbery Creation Form"};
 
-  for (int i = 0; i < 3 ; i++){
+  int i;
+  AForm * tmp;
+
+  for (i = 0; i < 3 ; i++){
 
     if (formNames[i] == name)
       break ;
@@ -71,17 +68,22 @@ AForm *   Intern::makeForm(std::string name, std::string target){
   switch (i) {
 
     case 0 :
-      AForm * Robot == new RobotomyRequestForm(target);
-      return (std::cout << "Intern creates Robotomy Request Form." << std::endl, Robot);
+      tmp = new RobotomyRequestForm(target);
+      std::cout << "Intern creates Robotomy Request Form." << std::endl;
+      break ;
     case 1 :
-      AForm * Pardon == new PresidentialPardonForm(target);
-      return (std::cout << "Intern creates Presidential Pardon Form ." << std::endl, Pardon);
+      tmp = new PresidentialPardonForm(target);
+      std::cout << "Intern creates Presidential Pardon Form ." << std::endl;
+      break ;
     case 2 :
-      AForm * Shrubbery == new ShrubberyCreationForm(target);
-      return (std::cout << "Intern creates Shrubbery Creation Form." << std::endl, Shrubbery);
-    default 
-      return (std::cout << "Intern couldn't find a form with this name ..." << std::endl, NULL;)
+      tmp = new ShrubberyCreationForm(target);
+      std::cout << "Intern creates Shrubbery Creation Form." << std::endl;
+      break ;
+    default :
+      tmp = NULL;
+      std::cout << "Intern couldn't find a form with this name ..." << std::endl;
   }
+  return tmp;
 }
 
 ////////////////////////////////////////////////////////////////////

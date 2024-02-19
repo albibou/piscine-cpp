@@ -1,5 +1,5 @@
-#ifndef SHRUBBERYCREATIONFORM_H
-# define SHRUBBERYCREATIONFORM_H
+#ifndef PRESIDENTIALPARDONFORM_H
+# define PRESIDENTIALPARDONFORM_H
 
 # include <iostream>
 # include <string>
@@ -21,11 +21,6 @@ class PresidentialPardonForm : public AForm{
     std::string   getTarget(void) const;
     void          execute(Bureaucrat const & executor) const;
 
-    //class FileOpeningException : public std::exception{
-
-      public :
-        const char * what() const throw();
-    }; 
 
   private :
 
