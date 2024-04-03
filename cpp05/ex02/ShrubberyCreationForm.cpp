@@ -90,8 +90,9 @@ void          ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 
     checkFormExecRequirements(executor);
     std::ofstream newfile;
+    std::string filename = _target + "_shrubbery";
 
-    newfile.open(_target.c_str(), std::fstream::out);
+    newfile.open(filename.c_str(), std::fstream::out);
     if (!newfile.is_open())
       throw FileOpeningException();
     newfile << "               ,@@@@@@@," << std::endl;
