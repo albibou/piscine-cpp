@@ -41,7 +41,7 @@ class ScalarConverter{
     static void  handle_pseudo_litteral(std::string const & litteral);
 
     static bool  is_int(std::string const & litteral, std::string const & res);
-    static void  handle_int(long double num);
+    static void  handle_int(long double num, std::string const & litteral);
 
     static bool  is_float(std::string const & litteral, std::string const & res);
     static void  handle_float(long double num, std::string const & litteral);

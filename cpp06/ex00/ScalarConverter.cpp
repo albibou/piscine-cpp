@@ -111,10 +111,11 @@ bool  ScalarConverter::is_int(std::string const & litteral, std::string const & 
   return false ;
 }
 
-void  ScalarConverter::handle_int(long double num){
+void  ScalarConverter::handle_int(long double num, std::string const & litteral){
 
   std::stringstream o;
-  int i = static_cast<int>(num);
+  char *buffer = NULL;
+  int i = strtol(litteral.c_str(), &buffer, 10);
 
   if (num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max()){
     if (static_cast<char>(i) >= std::numeric_limits<char>::min() && static_cast<char>(i) <= std::numeric_limits<char>::max()){
@@ -133,10 +134,10 @@ void  ScalarConverter::handle_int(long double num){
     std::cout << o.str();
   }
   else {
-    std::cout << CHAR << "Int overflow, impossible" << std::endl;
-    std::cout << INT << "Int overflow, impossible" << std::endl;
-    std::cout << FLOAT << "Int overflow, impossible" << std::endl;
-    std::cout << DOUBLE << "Int overflow, impossible" << std::endl;
+    std::cout << CHAR << "Int over/underflow, impossible" << std::endl;
+    std::cout << INT << "Int over/underflow, impossible" << std::endl;
+    std::cout << FLOAT << "Int over/underflow, impossible" << std::endl;
+    std::cout << DOUBLE << "Int over/underflow, impossible" << std::endl;
   }
   return ;
 }
@@ -151,9 +152,10 @@ bool  ScalarConverter::is_float(std::string const & litteral, std::string const 
 void  ScalarConverter::handle_float(long double num, std::string const & litteral){
 
   std::stringstream o;
-  float f = static_cast<float>(num);
+  char *buffer = NULL;
+  float f = strtof(litteral.c_str(), &buffer);
 
-  if (num >= std::numeric_limits<float>::min() && num <= std::numeric_limits<float>::max()){
+  if (std::abs(num) >= std::numeric_limits<float>::min() && std::abs(num) <= std::numeric_limits<float>::max()){
     if (static_cast<char>(f) >= std::numeric_limits<char>::min() && static_cast<char>(f) <= std::numeric_limits<char>::max()){
       if (is_printable(static_cast<char>(f)))
         std::cout << CHAR << static_cast<char>(f) << std::endl;
@@ -162,7 +164,7 @@ void  ScalarConverter::handle_float(long double num, std::string const & littera
     }
     else
       std::cout << CHAR << IMPOSSIBLE << std::endl;
-    if (static_cast<int>(f) >= std::numeric_limits<int>::min() && static_cast<int>(f) <= std::numeric_limits<int>::max())
+    if (std::abs(f) >= std::numeric_limits<int>::min() && std::abs(f) <= std::numeric_limits<int>::max())
       std::cout << INT << static_cast<int>(f) << std::endl;
     else 
       std::cout << INT << IMPOSSIBLE << std::endl;
@@ -173,10 +175,10 @@ void  ScalarConverter::handle_float(long double num, std::string const & littera
     std::cout << o.str();
   }
   else {
-    std::cout << CHAR << "Float overflow, impossible" << std::endl;
-    std::cout << INT << "Float overflow, impossible" << std::endl;
-    std::cout << FLOAT << "Float overflow, impossible" << std::endl;
-    std::cout << DOUBLE << "Float overflow, impossible" << std::endl;
+    std::cout << CHAR << "Float over/underflow, impossible" << std::endl;
+    std::cout << INT << "Float over/underflow, impossible" << std::endl;
+    std::cout << FLOAT << "Float over/underflow, impossible" << std::endl;
+    std::cout << DOUBLE << "Float over/underflow, impossible" << std::endl;
   }
   return ;
 }
@@ -193,7 +195,7 @@ void  ScalarConverter::handle_double(long double num, std::string const & litter
   std::stringstream o;
   double d = static_cast<double>(num);
 
-  if (num >= std::numeric_limits<double>::min() && num <= std::numeric_limits<double>::max()){
+  if (std::abs(num) >= std::numeric_limits<double>::min() && std::abs(num) <= std::numeric_limits<double>::max()){
     if (static_cast<char>(d) >= std::numeric_limits<char>::min() && static_cast<char>(d) <= std::numeric_limits<char>::max()){
       if (is_printable(static_cast<char>(d)))
         std::cout << CHAR << static_cast<char>(d) << std::endl;
@@ -202,13 +204,13 @@ void  ScalarConverter::handle_double(long double num, std::string const & litter
     }
     else
       std::cout << CHAR << IMPOSSIBLE << std::endl;
-    if (static_cast<int>(d) >= std::numeric_limits<int>::min() && static_cast<int>(d) <= std::numeric_limits<int>::max())
+    if (std::abs(d) >= std::numeric_limits<int>::min() && std::abs(d) <= std::numeric_limits<int>::max())
       std::cout << INT << static_cast<int>(d) << std::endl;
     else 
       std::cout << INT << IMPOSSIBLE << std::endl;
     o << std::setprecision(litteral.size() - 1 - litteral.find("."));
     o << std::setiosflags(std::ios::fixed);
-    if (static_cast<float>(d) >= std::numeric_limits<float>::min() && static_cast<float>(d) <= std::numeric_limits<float>::max())
+    if (std::abs(static_cast<float>(d)) >= std::numeric_limits<float>::min() && std::abs(static_cast<float>(d)) <= std::numeric_limits<float>::max())
       o << FLOAT << static_cast<float>(d) << "f" << std::endl;
     else 
       std::cout << FLOAT << IMPOSSIBLE << std::endl;
@@ -216,10 +218,10 @@ void  ScalarConverter::handle_double(long double num, std::string const & litter
     std::cout << o.str();
   }
   else {
-    std::cout << CHAR << "Double overflow, impossible" << std::endl;
-    std::cout << INT << "Double overflow, impossible" << std::endl;
-    std::cout << FLOAT << "Double overflow, impossible" << std::endl;
-    std::cout << DOUBLE << "Double overflow, impossible" << std::endl;
+    std::cout << CHAR << "Double over/underflow, impossible" << std::endl;
+    std::cout << INT << "Double over/underflow, impossible" << std::endl;
+    std::cout << FLOAT << "Double over/underflow, impossible" << std::endl;
+    std::cout << DOUBLE << "Double over/underflow, impossible" << std::endl;
   }
   return ;
 }
@@ -243,7 +245,7 @@ void  ScalarConverter::convert(std::string const & litteral){
   long double num = strtold(litteral.c_str(), &tmp);
   std::string res(tmp);
   if (is_int(litteral, res))
-    return handle_int(num);
+    return handle_int(num, litteral);
   else if (is_float(litteral, res))
     return handle_float(num, litteral);
   else if (is_double(litteral, res))

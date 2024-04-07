@@ -1,0 +1,64 @@
+#include ".hpp"
+
+////////////////////////////////////////////////////////////////////
+///                 Constructors, Destructors                    ///
+////////////////////////////////////////////////////////////////////
+
+::(void){
+
+  if (PRINT)
+    std::cout << "Default constructor called" << std::endl;
+  return ;
+} 
+
+::( const & rhs){
+
+  (void)rhs;
+  //insert assignation
+  if (PRINT)
+    std::cout << "Copy constructor called" << std::endl;
+  return ;
+}
+
+::~(void){
+
+  if (PRINT)
+    std::cout << "Default destructor called" << std::endl;
+  return;
+}
+
+////////////////////////////////////////////////////////////////////
+///                       Operator overloads                     ///
+////////////////////////////////////////////////////////////////////
+
+ & ::operator=( const & rhs){
+
+  if (this != &rhs) 
+  {
+    //insert assignation
+  }
+  (void)rhs;
+  if (PRINT)
+    std::cout << "Assignation operator called" << std::endl;
+  return *this;
+}
+
+std::ostream & operator<<(std::ostream & o,  const & rhs){
+
+  (void)rhs;
+  /*o << insert output desired*/;
+  return o;
+}
+
+////////////////////////////////////////////////////////////////////
+///                        Getters/Setters                       ///
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+///                        Methods                               ///
+////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+///                        Exceptions                            ///
+////////////////////////////////////////////////////////////////////
+
