@@ -8,7 +8,7 @@
 #  define PRINT 0
 # endif
 
-template <typename T>
+template <typename T> 
 
 class Array{
 
@@ -25,9 +25,15 @@ class Array{
 
     unsigned int  size(void)const;
 
+    class outOfBonds : public std::exception {
+
+      public :
+        const char * what() const throw();
+    };
+
   private :
 
-    T*  elements;
+    T*  _elements;
     const unsigned int _size;
 
 };

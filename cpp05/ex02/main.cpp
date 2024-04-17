@@ -18,7 +18,7 @@
 
 int main(void){
 
-  std::cout << "Can't initialize Abstract class test (uncomment the main) :" << std::endl;
+//std::cout << "Can't initialize Abstract class test (uncomment the main) :" << std::endl;
 
   //AForm test();
   //

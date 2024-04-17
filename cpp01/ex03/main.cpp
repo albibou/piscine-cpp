@@ -17,7 +17,7 @@
 int main(void){
 
     {
-        Weapon  club = Weapon("crude spiked club");
+        Weapon  club = Weapon(NULL);
 
         HumanA bob("Bob", club);
         bob.attack();
