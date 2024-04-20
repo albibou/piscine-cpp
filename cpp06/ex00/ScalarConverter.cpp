@@ -118,7 +118,7 @@ void  ScalarConverter::handle_int(long double num, std::string const & litteral)
   int i = strtol(litteral.c_str(), &buffer, 10);
 
   if (num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max()){
-    if (static_cast<char>(i) >= std::numeric_limits<char>::min() && static_cast<char>(i) <= std::numeric_limits<char>::max()){
+    if (i >= std::numeric_limits<char>::min() && i <= std::numeric_limits<char>::max()){
       if (is_printable(static_cast<char>(i)))
         std::cout << CHAR << static_cast<char>(i) << std::endl;
       else
@@ -144,7 +144,7 @@ void  ScalarConverter::handle_int(long double num, std::string const & litteral)
 
 bool  ScalarConverter::is_float(std::string const & litteral, std::string const & res){
   
-  if (!litteral.empty() && res == "f" && litteral.find(".") != std::string::npos)
+  if (!litteral.empty() && (res == "f" || res == "F") && litteral.find(".") != std::string::npos)
     return true ;
   return false ;
 }
@@ -155,8 +155,8 @@ void  ScalarConverter::handle_float(long double num, std::string const & littera
   char *buffer = NULL;
   float f = strtof(litteral.c_str(), &buffer);
 
-  if (std::abs(num) >= std::numeric_limits<float>::min() && std::abs(num) <= std::numeric_limits<float>::max()){
-    if (static_cast<char>(f) >= std::numeric_limits<char>::min() && static_cast<char>(f) <= std::numeric_limits<char>::max()){
+  if (std::abs(num) >= -std::numeric_limits<float>::max() && std::abs(num) <= std::numeric_limits<float>::max()){
+    if (f >= std::numeric_limits<char>::min() && f <= std::numeric_limits<char>::max()){
       if (is_printable(static_cast<char>(f)))
         std::cout << CHAR << static_cast<char>(f) << std::endl;
       else
@@ -195,8 +195,8 @@ void  ScalarConverter::handle_double(long double num, std::string const & litter
   std::stringstream o;
   double d = static_cast<double>(num);
 
-  if (std::abs(num) >= std::numeric_limits<double>::min() && std::abs(num) <= std::numeric_limits<double>::max()){
-    if (static_cast<char>(d) >= std::numeric_limits<char>::min() && static_cast<char>(d) <= std::numeric_limits<char>::max()){
+  if (std::abs(num) >= -std::numeric_limits<double>::max() && std::abs(num) <= std::numeric_limits<double>::max()){
+    if (d >= std::numeric_limits<char>::min() && d <= std::numeric_limits<char>::max()){
       if (is_printable(static_cast<char>(d)))
         std::cout << CHAR << static_cast<char>(d) << std::endl;
       else

@@ -48,7 +48,6 @@ int main(void){
      AForm *form2 = intern1.makeForm("Presidential Pardon Form", "Patrick Dils");
      if (form2)
      {
-       form2 = NULL;
        std::cout << *form2 << std::endl;
        bureaucrat1.signForm(*form2);
        bureaucrat1.executeForm(*form2);
