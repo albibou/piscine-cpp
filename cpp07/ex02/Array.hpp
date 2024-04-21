@@ -1,8 +1,10 @@
-#ifndef CLASS_H
-# define CLASS_H
+#ifndef ARRAY_H
+# define ARRAY_H
 
 # include <iostream>
 # include <string>
+# include <stdlib.h>
+# include "Array.tpp"
 
 # ifndef PRINT
 #  define PRINT 0
@@ -19,13 +21,13 @@ class Array{
     Array(Array const & rhs);
     ~Array(void);
 
-    Array & operator=(Array const & rhs) const;
+    Array<T> & operator=(Array<T> const & rhs);
     T & operator[](unsigned int index) const;
 
 
     unsigned int  size(void)const;
 
-    class outOfBonds : public std::exception {
+    class IndexTooBig : public std::exception {
 
       public :
         const char * what() const throw();

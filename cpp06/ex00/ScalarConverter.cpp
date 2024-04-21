@@ -38,12 +38,6 @@ ScalarConverter & ScalarConverter::operator=(ScalarConverter const & rhs){
   return *this;
 }
 
-std::ostream & operator<<(std::ostream & o, ScalarConverter const & rhs){
-
-  (void)rhs;
-  return o;
-}
-
 ////////////////////////////////////////////////////////////////////
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////

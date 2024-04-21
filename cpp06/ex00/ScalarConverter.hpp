@@ -52,6 +52,5 @@ class ScalarConverter{
     static void  handle_impossible(void);
 };
 
-std::ostream & operator<<(std::ostream & o, ScalarConverter const & rhs);
 
 #endif

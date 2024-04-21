@@ -21,8 +21,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./main.cpp \
-	  ./Class.cpp \
+SRC	= ./main2.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 
