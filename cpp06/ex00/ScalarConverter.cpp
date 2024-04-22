@@ -138,7 +138,7 @@ void  ScalarConverter::handle_int(long double num, std::string const & litteral)
 
 bool  ScalarConverter::is_float(std::string const & litteral, std::string const & res){
   
-  if (!litteral.empty() && (res == "f" || res == "F") && litteral.find(".") != std::string::npos)
+  if (!litteral.empty() && (res == "f" || res == "F") && litteral.find(".") != std::string::npos && isdigit(litteral[litteral.find(".") + 1]))
     return true ;
   return false ;
 }
@@ -179,7 +179,7 @@ void  ScalarConverter::handle_float(long double num, std::string const & littera
 
 bool  ScalarConverter::is_double(std::string const & litteral, std::string const & res){
   
-  if (!litteral.empty() && res.empty() && litteral.find(".") != std::string::npos)
+  if (!litteral.empty() && res.empty() && litteral.find(".") != std::string::npos && isdigit(litteral[litteral.size() - 1]))
     return true ;
   return false ;
 }
