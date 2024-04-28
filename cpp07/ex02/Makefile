@@ -1,11 +1,11 @@
 # Project
 
-NAME = name
+NAME = Array
 
 # Compiler
 
 CXX	= g++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -g3
 # Paths
 
 SRC_PATH	= ./
@@ -21,7 +21,7 @@ RM	= rm -rf
 
 # Files
 
-SRC	= ./main2.cpp \
+SRC	= ./main.cpp \
 
 OBJ	= $(addprefix $(BIN_PATH), $(SRC:.cpp=.o))
 

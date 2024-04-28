@@ -16,11 +16,6 @@
 # include <iostream>
 # include <string>
 # include <stdlib.h>
-# include "Array.tpp"
-
-# ifndef PRINT
-#  define PRINT 0
-# endif
 
 template <typename T> 
 
@@ -28,29 +23,72 @@ class Array{
 
   public :
 
-    Array(void);
-    Array(unsigned int size);
-    Array(Array const & rhs);
-    ~Array(void);
+    Array(void) : _elements(NULL), _size(0){
+      return ;
+    }
 
-    Array<T> & operator=(Array<T> const & rhs);
-    T & operator[](unsigned int index) const;
+    Array(unsigned int size) : _size(size) {
+      _elements = new T[_size];
+      return ;
+    }
 
+    Array(Array const & rhs) :  _size(rhs._size){
 
-    unsigned int  size(void)const;
+      if (_size){
+        this->_elements = new T[_size];
+        for (unsigned int i = 0; i < _size; i++)
+          this->_elements[i] = rhs._elements[i];
+      }
+      else 
+        this->_elements = NULL;
+      return ;
+    }
+
+    ~Array(void) {
+      if (this->_elements)
+        delete[] this->_elements;
+      return;
+    }
+
+    Array<T> & operator=(Array<T> const & rhs){
+      if (this != &rhs) {
+        this->_size = rhs._size;
+        if (this->_elements)
+          delete this->_elements;
+        if (this->_size){
+          this->_elements = new T[_size];
+          for (unsigned int i = 0; i < _size; i++)
+            this->_elements[i] = rhs._elements[i];
+        }
+        else 
+          this->_elements = NULL;
+      }
+      return *this;
+    }
+
+    T & operator[](unsigned int index) const {
+      if (index >= this->_size)
+        throw Array<T>::IndexTooBig();
+      return this->_elements[index] ;
+    }
+
+    unsigned int  size(void)const {
+      return (this->_size);
+    }
 
     class IndexTooBig : public std::exception {
 
       public :
-        const char * what() const throw();
+        const char * what() const throw(){
+          return ("This index is out of range");
+        }
     };
 
   private :
 
     T*  _elements;
-    const unsigned int _size;
+    unsigned int _size;
 
 };
-
 
 #endif
