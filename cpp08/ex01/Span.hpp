@@ -6,6 +6,13 @@
 # include <algorithm>
 # include <vector>
 # include <set>
+# include <deque>
+# include <list>
+# include <limits.h>
+# include <fstream>
+
+# define SHORT_SPAN "Shortest Span : "
+# define LONG_SPAN "Longest Span : "
 
 # ifndef PRINT
 #  define PRINT 0
@@ -24,10 +31,15 @@ class Span{
 
     void  addNumber(int number);
     template <typename Iterator>
-    void  addManyNumbers(Iterator begin, Iterator end);
+    void  addManyNumbers(Iterator begin, Iterator end){
+
+      for (Iterator it = begin; it != end; it++)
+        addNumber(*it);
+    } 
 
     unsigned int getSize(void) const;
     unsigned int getMaxCapacity(void) const;
+    const std::set<int>& getSet(void) const;
 
     unsigned int shortestSpan(void);
     unsigned int longestSpan(void);

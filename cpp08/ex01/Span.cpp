@@ -50,6 +50,13 @@ Span & Span::operator=(Span const & rhs){
   return *this;
 }
 
+std::ostream & operator<<(std::ostream & o, Span const & rhs){
+
+  for(std::set<int>::const_iterator it = rhs.getSet().begin(); it != rhs.getSet().end(); it++)
+    o << *it << std::endl;
+  return o;
+}
+
 ////////////////////////////////////////////////////////////////////
 ///                        Getters/Setters                       ///
 ////////////////////////////////////////////////////////////////////
@@ -64,6 +71,11 @@ unsigned int  Span::getMaxCapacity(void) const{
   return this->_maxCapacity;
 }
 
+const std::set<int> & Span::getSet(void) const{
+
+  return _numbers;
+}
+
 ////////////////////////////////////////////////////////////////////
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////
@@ -75,22 +87,15 @@ void  Span::addNumber(int number){
   _numbers.insert(number);
 }
 
-template <typename Iterator>
-void  Span::addManyNumbers(Iterator begin, Iterator end){
-
-  for (Iterator it = begin; it != end; it++)
-    addNumber(*it);
-}
-
 unsigned int  Span::shortestSpan(void){
 
   if (getSize() < 2)
     throw Span::NotEnoughNumbers();
 
   std::set<int>::const_iterator it = _numbers.begin();
-  int shortestSpan = *(_numbers.upper_bound(*it)) - *it;
-  for (std::set<int>::const_iterator it; ++it != _numbers.end(); it++){
-    if (*(_numbers.upper_bound(*it)) - *it < shortestSpan)
+  unsigned int shortestSpan = *(_numbers.upper_bound(*it)) - *it;
+  for (std::set<int>::const_iterator it = _numbers.begin(); it != --(_numbers.end()); it++){
+    if (static_cast<unsigned int>(*(_numbers.upper_bound(*it)) - *it) < shortestSpan)
       shortestSpan = *(_numbers.upper_bound(*it)) - *it;
   }
   return shortestSpan;

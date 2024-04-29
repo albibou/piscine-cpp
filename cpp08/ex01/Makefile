@@ -5,7 +5,7 @@ NAME = Span
 # Compiler
 
 CXX	= g++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -g3
 # Paths
 
 SRC_PATH	= ./
