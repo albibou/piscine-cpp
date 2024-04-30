@@ -18,7 +18,7 @@ int main(void){
   int int_array[] = {0, 1, 2, 3};
   iter(int_array, sizeof(int_array) / sizeof(*int_array), test<int>);
   
-  std::cout << std::endl << "Test on an float array" << std::endl;
+  std::cout << std::endl << "Test on a float array" << std::endl;
   float float_array[] = {0.0f, 1.5f, 2.3f, 3.1f};
   iter(float_array, sizeof(float_array) / sizeof(*float_array), test<float>);
  
