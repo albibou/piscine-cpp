@@ -2,11 +2,13 @@
 # define CLASS_H
 
 # include <iostream>
+# include <iomanip>
 # include <string>
 # include <map>
 # include <limits>
 # include <algorithm>
 # include <fstream>
+# include <sstream>
 # include <cstdlib>
 
 # ifndef PRINT
@@ -27,6 +29,8 @@ class BitcoinExchange{
 
     BitcoinExchange & operator=(BitcoinExchange const & rhs);
 
+    void  exchange(std::string const file_name) const;
+    void  print_data_set(void)const;
 
   private :
 
@@ -34,9 +38,16 @@ class BitcoinExchange{
 
     void  set_database(void);
     void  check_input_file(std::ifstream & file, int type) const;
-    void  parse_input_file(std::ifstream & db_file);
+    void  parse_data_file(std::ifstream & db_file);
     bool  date_is_valid(std::string const & date) const;
+    bool  get_token_date(std::string const & token_litteral, double *token_value) const;
+    bool  is_leap_year(double year) const;
     bool  btc_value_is_valid(std::string const & value) const;
+
+    void  parse_input_file(std::ifstream & input_file) const;
+    bool  amount_value_is_valid(std::string const & value, std::string const & line) const;
+    bool  get_previous_date(std::string & date) const;
+    bool  get_value_from_date(std::string & date, double * btc_value) const;
 
     class FileNotOpen : public std::exception{
       const char * what() const throw();

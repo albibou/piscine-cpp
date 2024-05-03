@@ -11,5 +11,15 @@ int main(int argc, char **argv){
   catch (const std::exception & e){
     std::cerr << e.what() << std::endl;
   }
+  /* (void)argc; */
+  /* (void)argv; */
+  /* try { */
+  /*   BitcoinExchange btc; */
+  /**/
+  /*   btc.print_data_set(); */
+  /* } */
+  /* catch (const std::exception & e){ */
+  /*   std::cerr << e.what() << std::endl; */
+  /* } */
   return (0);
 }
