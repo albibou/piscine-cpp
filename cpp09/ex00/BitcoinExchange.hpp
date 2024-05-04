@@ -48,6 +48,7 @@ class BitcoinExchange{
     bool  amount_value_is_valid(std::string const & value, std::string const & line) const;
     bool  get_previous_date(std::string & date) const;
     bool  get_value_from_date(std::string & date, double * btc_value) const;
+    size_t  get_precision_from_value(double btc_value) const;
 
     class FileNotOpen : public std::exception{
       const char * what() const throw();

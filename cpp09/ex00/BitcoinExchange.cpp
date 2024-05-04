@@ -79,7 +79,7 @@ bool  BitcoinExchange::get_token_date(std::string const & token_litteral, double
 
   char *rest = NULL;
   *token_value = strtod(token_litteral.c_str(), &rest);
-  if (!static_cast<std::string>(rest).empty() &&  rest[0] != ' ')
+  if (!static_cast<std::string>(rest).empty())
     return false;
   return true;
 }
@@ -208,9 +208,9 @@ bool BitcoinExchange::get_previous_date(std::string & date) const{
     }
   }
   std::ostringstream newDateStream;
-  (day < 10) ? newDateStream << "0" << day << "-" : newDateStream << day << "-";
+  newDateStream << year << "-";
   (month < 10) ? newDateStream << "0" << month << "-" : newDateStream << month << "-";
-  newDateStream << year;
+  (day < 10) ? newDateStream << "0" << day : newDateStream << day;
   date = newDateStream.str();
   return true;
 }
@@ -223,6 +223,15 @@ bool BitcoinExchange::get_value_from_date(std::string & date, double * btc_value
   }
   *btc_value = (*_dataset.find(date)).second;
   return true;
+}
+
+size_t  BitcoinExchange::get_precision_from_value(double btc_value) const{
+
+  std::stringstream tmp_stream;
+
+  tmp_stream << btc_value;
+  std::string value_to_str = tmp_stream.str();
+  return (value_to_str.size() - 1 - value_to_str.find("."));
 }
 
 void  BitcoinExchange::parse_input_file(std::ifstream & input_file) const{
@@ -238,12 +247,12 @@ void  BitcoinExchange::parse_input_file(std::ifstream & input_file) const{
 
     separator = line.find('|');
     if (separator == std::string::npos || line.size() < 10){
-      std::cerr << "Error: bad input =>" << line << std::endl;
+      std::cerr << "Error: bad input => " << line << std::endl;
       continue ;
     }
-    date = line.substr(0, separator);
+    date = line.substr(0, separator - 1);
     if (!date_is_valid(date)){
-      std::cerr << "Error: bad input =>" << line << std::endl;
+      std::cerr << "Error: bad input => " << line << std::endl;
       continue ;
     }
     amount = line.substr(separator + 1);
@@ -256,7 +265,8 @@ void  BitcoinExchange::parse_input_file(std::ifstream & input_file) const{
       std::cerr << "Error: too large of a number" << line << std::endl;
       continue ;
     }
-    std::cout << line << " * " << btc_value << " = ";
+    std::cout << date << " =>" << amount <<  " = ";
+    //std::cout << std::fixed << std::setprecision(get_precision_from_value(btc_value)) << result << std::endl;
     std::cout << std::fixed << std::setprecision(2) << result << std::endl;
   }
   return;
