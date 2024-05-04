@@ -62,7 +62,7 @@ static void string_array_tests(void){
       }
     }
 
-  std::cout << std::endl << "To prove deep copy/assignation we're going to change Array2. If Array remains the same after, the copy is deep " << std::endl;
+  std::cout << std::endl << "To prove deep copy/assignation we're going to change Array2. If Array1 remains the same after, the copy is deep " << std::endl;
   for(unsigned int i = 0; i < array2.size(); i++){
 
     try{
@@ -92,8 +92,16 @@ static void string_array_tests(void){
   catch (const std::exception & e){
     std::cerr << e.what() << std::endl;
   }
-  return ;
 
+  std::cout << std::endl << "We're going to modify a value with [] operator " << std::endl;
+  try {
+    std::cout << "array2[0] before = " << array1[0] << std::endl;
+    array1[0] = "It worked";
+    std::cout << "array2[0] after = " << array1[0] << std::endl;
+  }
+  catch (const std::exception & e){
+    std::cerr << e.what() << std::endl;
+  }
 
   return ;
 }
@@ -140,7 +148,7 @@ static void int_array_tests(void){
       }
     }
 
-  std::cout << std::endl << "To prove deep copy/assignation we're going to change Array2. If Array remains the same after, the copy is deep " << std::endl;
+  std::cout << std::endl << "To prove deep copy/assignation we're going to change Array2. If Array1 remains the same after, the copy is deep " << std::endl;
   for(unsigned int i = 0; i < array2.size(); i++){
 
     try{
@@ -170,6 +178,17 @@ static void int_array_tests(void){
   catch (const std::exception & e){
     std::cerr << e.what() << std::endl;
   }
+
+  std::cout << std::endl << "We're going to modify a value with [] operator " << std::endl;
+  try {
+    std::cout << "array1[0] before = " << array1[0] << std::endl;
+    array1[0] = 42;
+    std::cout << "array1[0] after = " << array1[0] << std::endl;
+  }
+  catch (const std::exception & e){
+    std::cerr << e.what() << std::endl;
+  }
+
   return ;
 }
 
@@ -177,5 +196,6 @@ int main(void){
 
   int_array_tests();
   string_array_tests();
+  
   return 0;
 }
