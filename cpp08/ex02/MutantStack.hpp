@@ -3,6 +3,9 @@
 
 # include <iostream>
 # include <string>
+# include <algorithm>
+# include <ctime>
+# include <cstdlib>
 # include <stack>
 # include <deque>
 # include <vector>

@@ -1,10 +1,6 @@
 #include "MutantStack.hpp"
 
-int main(void){
-
-  std::cout << "To demonstrate that our MutantStack is iterable, we are going to";
-  std::cout << " operate on a vector and deque filled with the same values that our future MutantStack";
-  std::cout << " and compare results : " << std::endl;
+void  vector_tests(void){
 
   std::cout << std::endl << "Tests on a vector" << std::endl;
 
@@ -31,12 +27,54 @@ int main(void){
 
   for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
     std::cout << *it << std::endl;
-  
+
   std::cout << std::endl << "Test 5 : We're now going to use reverse_iterator to print content of vector backward" << std::endl;
 
   for (std::vector<int>::reverse_iterator it = vector_test.rbegin(); it != vector_test.rend(); it++)
     std::cout << *it << std::endl;
-  
+
+  std::cout << std::endl << "Test 6 : Let's use iterators to swap values in our vector and reverse it in place " << std::endl;
+
+  std::vector<int>::iterator vec_it_swap = vector_test.begin();
+  std::vector<int>::reverse_iterator vec_rit_swap = vector_test.rbegin();
+
+  for (size_t i = 0; i < vector_test.size() / 2; vec_it_swap++, vec_rit_swap++, i++){
+    int tmp = *vec_rit_swap;
+    *vec_rit_swap = *vec_it_swap;
+    *vec_it_swap = tmp;
+  }
+
+  for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 7: Let's use iterators to modify values with other" << std::endl;
+
+  std::srand(std::time(0));
+  for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
+    *it = std::rand();
+
+  for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 8: Let's run some stl algorithms on our vector" << std::endl;
+
+  std::cout << std::endl << "std::sort :" << std::endl;
+  std::sort(vector_test.begin(), vector_test.end());
+
+  for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "std::reverse :" << std::endl;
+  std::reverse(vector_test.begin(), vector_test.end());
+
+  for (std::vector<int>::iterator it = vector_test.begin(); it != vector_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  return ;
+}
+
+void  deque_tests(){
+
   std::cout << std::endl << "Tests on a deque, since that by default, stack containers are deque wrapped in a container adaptor" << std::endl;
 
   std::deque<int> deque_test;
@@ -62,12 +100,53 @@ int main(void){
 
   for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
     std::cout << *it << std::endl;
-  
+
   std::cout << std::endl << "Test 5 : We're now going to use reverse_iterator to print content of deque backward" << std::endl;
 
   for (std::deque<int>::reverse_iterator it = deque_test.rbegin(); it != deque_test.rend(); it++)
     std::cout << *it << std::endl;
-  
+
+  std::cout << std::endl << "Test 6 : Let's use iterators to swap values in our deque and reverse it in place " << std::endl;
+
+  std::deque<int>::iterator deq_it_swap = deque_test.begin();
+  std::deque<int>::reverse_iterator deq_rit_swap = deque_test.rbegin();
+
+  for (size_t i = 0; i < deque_test.size() / 2; deq_it_swap++, deq_rit_swap++, i++){
+    int tmp = *deq_rit_swap;
+    *deq_rit_swap = *deq_it_swap;
+    *deq_it_swap = tmp;
+  }
+
+  for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 7: Let's use iterators to modify values with other" << std::endl;
+
+  std::srand(std::time(0));
+  for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
+    *it = std::rand();
+
+  for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 8: Let's run some stl algorithms on our deque" << std::endl;
+
+  std::cout << std::endl << "std::sort :" << std::endl;
+  std::sort(deque_test.begin(), deque_test.end());
+
+  for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "std::reverse :" << std::endl;
+  std::reverse(deque_test.begin(), deque_test.end());
+
+  for (std::deque<int>::iterator it = deque_test.begin(); it != deque_test.end(); it++)
+    std::cout << *it << std::endl;
+  return ;
+}
+
+void  mutantStack_tests(void){
+
   std::cout << std::endl << "Tests on our MutantStack" << std::endl;
 
   MutantStack<int> mstack_test;
@@ -93,11 +172,60 @@ int main(void){
 
   for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
     std::cout << *it << std::endl;
-  
+
   std::cout << std::endl << "Test 5 : We're now going to use reverse_iterator to print content of MutantStack backward" << std::endl;
 
   for (MutantStack<int>::reverse_iterator it = mstack_test.rbegin(); it != mstack_test.rend(); it++)
     std::cout << *it << std::endl;
 
+  std::cout << std::endl << "Test 6 : Let's use iterators to swap values in our mutantStack and reverse it in place " << std::endl;
+
+  MutantStack<int>::iterator mut_it_swap = mstack_test.begin();
+  MutantStack<int>::reverse_iterator mut_rit_swap = mstack_test.rbegin();
+
+  for (size_t i = 0; i < mstack_test.size() / 2; mut_it_swap++, mut_rit_swap++, i++){
+    int tmp = *mut_rit_swap;
+    *mut_rit_swap = *mut_it_swap;
+    *mut_it_swap = tmp;
+  }
+
+  for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 7: Let's use iterators to modify values with other" << std::endl;
+
+  std::srand(std::time(0));
+  for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
+    *it = std::rand();
+
+  for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "Test 8: Let's run some stl algorithms on our mutant stack" << std::endl;
+
+  std::cout << std::endl << "std::sort :" << std::endl;
+  std::sort(mstack_test.begin(), mstack_test.end());
+
+  for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
+    std::cout << *it << std::endl;
+
+  std::cout << std::endl << "std::reverse :" << std::endl;
+  std::reverse(mstack_test.begin(), mstack_test.end());
+
+  for (MutantStack<int>::iterator it = mstack_test.begin(); it != mstack_test.end(); it++)
+    std::cout << *it << std::endl;
+  return ;
+}
+
+int main(void){
+
+  std::cout << "To demonstrate that our MutantStack is iterable, we are going to";
+  std::cout << " operate on a vector and deque filled with the same values that our future MutantStack";
+  std::cout << " and compare results : " << std::endl;
+
+  vector_tests();
+  deque_tests();
+  mutantStack_tests();
+  
   return (0);
 }

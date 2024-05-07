@@ -9,13 +9,13 @@
 # include <list>
 
 template <typename T>
-const int & easyfind(T const & container, int target){
+int easyfind(T const & container, int target){
 
   typename T::const_iterator it = std::find(container.begin(), container.end(), target);
 
   if (it == container.end())
     throw std::out_of_range("Target hasn't been found in given container");
-  return *it;
+  return std::distance(container.begin(), it);
 }
 
 #endif

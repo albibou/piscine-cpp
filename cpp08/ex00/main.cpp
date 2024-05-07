@@ -5,19 +5,45 @@ void  list_tests(void){
   std::cout << std::endl << "Let's run tests on list type container" << std::endl;
   std::list<int>  int_list;
 
-  for (int i = 0; i < 10; i++)
-    int_list.push_back(i);
+  int_list.push_back(42);
+  int_list.push_back(-1);
+  int_list.push_back(7);
+
+  std::cout << "Let's display the list and it's indexes" << std::endl;
+  size_t i = 0;
+  for (std::list<int>::const_iterator it = int_list.begin(); it != int_list.end(); it++, i++)
+    std::cout << "int_list[" << i << "] = " << *it << std::endl;
 
   std::cout << std::endl << "We'll try our function with values that are in the container" << std::endl;
   try {
-    int test = easyfind(int_list, 3);
-    std::cout << test << std::endl;
-    test = easyfind(int_list, 1);
-    std::cout << test << std::endl;
+    int test = easyfind(int_list, -1);
+    std::cout << "-1 found at index : " << test << std::endl;
     test = easyfind(int_list, 7);
-    std::cout << test << std::endl;
-    test = easyfind(int_list, 9);
-    std::cout << test << std::endl;
+    std::cout << "7 found at index : " << test << std::endl;
+  }
+  catch(const std::exception & e){
+    std::cerr << e.what() << std::endl;
+  }
+
+  std::cout << std::endl << "Let's add some values and retry" << std::endl;
+
+  int_list.push_front(100);
+  int_list.push_front(101);
+  int_list.push_front(102);
+
+  std::cout << std::endl << "Let's display the list and it's indexes" << std::endl;
+  i = 0;
+  for (std::list<int>::const_iterator it = int_list.begin(); it != int_list.end(); it++, i++)
+    std::cout << "int_list[" << i << "] = " << *it << std::endl;
+
+  std::cout << std::endl;
+  try {
+    int test = easyfind(int_list, -1);
+    std::cout << "-1 found at index : " << test << std::endl;
+    test = easyfind(int_list, 7);
+    std::cout << "7 found at index : " << test << std::endl;
+    test = easyfind(int_list, 100);
+    std::cout << "100 found at index : " << test << std::endl;
   }
   catch(const std::exception & e){
     std::cerr << e.what() << std::endl;
@@ -26,7 +52,7 @@ void  list_tests(void){
   std::cout << std::endl << "We'll now try with value that is not in the container" << std::endl;
   try {
     int test = easyfind(int_list, -1000);
-    std::cout << test << std::endl;
+    std::cout << "found at index : " << test << std::endl;
   }
   catch(const std::exception & e){
     std::cerr << e.what() << std::endl;
@@ -36,22 +62,48 @@ void  list_tests(void){
 
 void  vector_tests(void){
 
-  std::cout << "Let's run tests on vector type container" << std::endl;
+  std::cout << std::endl << "Let's run tests on vector type container" << std::endl;
   std::vector<int>  int_vector;
 
-  for (int i = 0; i < 10; i++)
-    int_vector.push_back(i);
+  int_vector.push_back(42);
+  int_vector.push_back(-1);
+  int_vector.push_back(7);
+
+  std::cout << "Let's display the vector and it's indexes" << std::endl;
+  size_t i = 0;
+  for (std::vector<int>::const_iterator it = int_vector.begin(); it != int_vector.end(); it++, i++)
+    std::cout << "int_vector[" << i << "] = " << *it << std::endl;
 
   std::cout << std::endl << "We'll try our function with values that are in the container" << std::endl;
   try {
-    int test = easyfind(int_vector, 3);
-    std::cout << test << std::endl;
-    test = easyfind(int_vector, 1);
-    std::cout << test << std::endl;
+    int test = easyfind(int_vector, -1);
+    std::cout << "-1 found at index : " << test << std::endl;
     test = easyfind(int_vector, 7);
-    std::cout << test << std::endl;
-    test = easyfind(int_vector, 9);
-    std::cout << test << std::endl;
+    std::cout << "7 found at index : " << test << std::endl;
+  }
+  catch(const std::exception & e){
+    std::cerr << e.what() << std::endl;
+  }
+
+  std::cout << std::endl << "Let's add some values and retry" << std::endl;
+
+  int_vector.push_back(100);
+  int_vector.push_back(101);
+  int_vector.push_back(102);
+
+  std::cout << std::endl << "Let's display the vector and it's indexes" << std::endl;
+  i = 0;
+  for (std::vector<int>::const_iterator it = int_vector.begin(); it != int_vector.end(); it++, i++)
+    std::cout << "int_vector[" << i << "] = " << *it << std::endl;
+
+  std::cout << std::endl;
+  try {
+    int test = easyfind(int_vector, -1);
+    std::cout << "-1 found at index : " << test << std::endl;
+    test = easyfind(int_vector, 7);
+    std::cout << "7 found at index : " << test << std::endl;
+    test = easyfind(int_vector, 102);
+    std::cout << "102 found at index : " << test << std::endl;
   }
   catch(const std::exception & e){
     std::cerr << e.what() << std::endl;
@@ -60,7 +112,7 @@ void  vector_tests(void){
   std::cout << std::endl << "We'll now try with value that is not in the container" << std::endl;
   try {
     int test = easyfind(int_vector, -1000);
-    std::cout << test << std::endl;
+    std::cout << "found at index : " << test << std::endl;
   }
   catch(const std::exception & e){
     std::cerr << e.what() << std::endl;

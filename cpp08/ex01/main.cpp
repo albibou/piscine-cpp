@@ -11,6 +11,7 @@ void test_with_vector(void){
   std::cout << std::endl << "Test 5 : We're now going to fill a vector with 15000 numbers and fill a Span with it" << std::endl;
 
   std::vector<int> vector_test(15000);
+  std::srand(std::time(0));
   std::generate(vector_test.begin(), vector_test.end(), generate_random_number);
 
   Span  span2(15000);
