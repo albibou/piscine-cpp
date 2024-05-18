@@ -69,7 +69,7 @@ void  PmergeMe::print_vector(int range) const{
   std::cout << "(";
   int i = 0;
   for (std::vector<int>::const_iterator it = _vec_to_sort.begin(); it != _vec_to_sort.end(); it++, i++){
-    if (i % (range * 2) == 0 && i)
+    if (i && range && i % (range * 2) == 0)
       std::cout << ")(";
     else if (i)
       std::cout << ",";
@@ -90,6 +90,20 @@ void  PmergeMe::vec_swap_groups(std::vector<int>::iterator left, std::vector<int
   } 
 }
 
+void  PmergeMe::vec_do_insertions(int range, size_t group_nbs){
+
+  std::vector<int>::iterator  to_insert = _vec_to_sort.begin() + (range * 2) + 1;
+  size_t  to_insert_from = std::distance(_vec_to_sort.begin(), to_insert);
+
+  for (size_t i = 0; i < group_nbs / 2; i++, to_insert = _vec_to_sort.begin() + to_insert_from){
+
+    size_t  groups_to_compare = 
+    std::vector<int>iterator to_compare = _vec_to_sort.begin() + (to_insert_from / 2);
+    
+  }
+
+}
+
 void  PmergeMe::vec_merge_insertion(int range){
 
   std::vector<int>::iterator left = _vec_to_sort.begin() + range - 1;
@@ -105,6 +119,11 @@ void  PmergeMe::vec_merge_insertion(int range){
   }
   print_vector(range);
   vec_merge_insertion(range * 2);
+  if (group_nbs > 2){
+    vec_do_insertions()
+    std::cout << "I will need to do insertions on range: " << range << " On these groups" << std::endl;
+    print_vector(range);
+  }
   return;
 }
 

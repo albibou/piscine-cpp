@@ -6,6 +6,12 @@ int main(int argc, char **argv){
     return (1);
   PmergeMe test;
 
-  test.sort_vector(argv + 1);
+  try {
+
+    test.sort_vector(argv + 1);
+  }
+  catch (const std::exception & e){
+    std::cerr << e.what() << std::endl;
+  }
   return (0);
 }

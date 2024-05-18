@@ -28,6 +28,7 @@ class PmergeMe{
     void  print_vector(int range) const;
 
     void  vec_swap_groups(std::vector<int>::iterator left, std::vector<int>::iterator right, int range);
+    void  vec_do_insertions(int range, size_t group_nbs);
     void  vec_merge_insertion(int range);
     void  sort_vector(char **args);
     void  sort_deque(char **args);
