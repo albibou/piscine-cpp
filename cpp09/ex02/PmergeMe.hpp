@@ -8,6 +8,7 @@
 # include <vector>
 # include <list>
 # include <deque>
+# include <algorithm>
 
 # ifndef PRINT
 #  define PRINT 0
@@ -27,8 +28,13 @@ class PmergeMe{
 
     void  print_vector(int range) const;
 
+
+    size_t  get_Jacobstahl_Number(bool restart);
+    size_t  find_position_in_vector(std::vector<int> & vec, int target);
+    void  fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range);
+
     void  vec_swap_groups(std::vector<int>::iterator left, std::vector<int>::iterator right, int range);
-    void  vec_do_insertions(int range, size_t group_nbs);
+    void  vec_insertions(int range);
     void  vec_merge_insertion(int range);
     void  sort_vector(char **args);
     void  sort_deque(char **args);

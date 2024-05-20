@@ -90,17 +90,159 @@ void  PmergeMe::vec_swap_groups(std::vector<int>::iterator left, std::vector<int
   } 
 }
 
-void  PmergeMe::vec_do_insertions(int range, size_t group_nbs){
 
-  std::vector<int>::iterator  to_insert = _vec_to_sort.begin() + (range * 2) + 1;
-  size_t  to_insert_from = std::distance(_vec_to_sort.begin(), to_insert);
 
-  for (size_t i = 0; i < group_nbs / 2; i++, to_insert = _vec_to_sort.begin() + to_insert_from){
+int getMultipleOfTwo(bool refresh)
+{
+	static int nbr = 4;
 
-    size_t  groups_to_compare = 
-    std::vector<int>iterator to_compare = _vec_to_sort.begin() + (to_insert_from / 2);
-    
+	if (refresh)
+		nbr = 4;
+	int	to_return = nbr;
+	nbr *= 2;
+	return (to_return);
+}
+
+int getDuoJacobsthalNbr(bool refresh)
+{
+	static int js = 1;
+	static int jsLast = 3;
+	
+	if (refresh)
+	{
+		js = 1;
+		jsLast = 3;
+	}
+	int	to_return = jsLast - js;
+	int	tmp = js;
+	js = jsLast;
+	jsLast = to_return + 2 * tmp;
+	return (to_return);		
+}
+
+
+void	updateIndex(size_t min, size_t max, std::vector<size_t> & vect, int range)
+{
+	size_t	size = vect.size();
+
+	for (size_t i = 0; i < size; ++i)
+	{
+		if (vect[i] > max)
+			return ;
+		else if (vect[i] >= min)
+			vect[i] += range;
+	}
+}
+
+// ************************************************************************** //
+//	INSERTION PART
+// ************************************************************************** //
+
+size_t	whereInsert(std::vector<int> & v, std::vector<size_t>& sortedIndexes, int nbrToInsert, int indexMax)
+{
+	int	indexMin = 0;
+	int indexMid;
+
+	if (indexMax + 1 > static_cast<int>(sortedIndexes.size()))
+		indexMax = sortedIndexes.size() - 1;
+	
+
+	while (indexMin + 1 != indexMax)
+	{
+		indexMid = indexMin + (indexMax - indexMin) / 2;
+		if (v[sortedIndexes[indexMid]] < nbrToInsert)
+			indexMin = indexMid;
+		else
+			indexMax = indexMid;
+	}
+	if (v[sortedIndexes[indexMin]] > nbrToInsert)
+		return (sortedIndexes[indexMin]);
+	if (v[sortedIndexes[indexMax]] < nbrToInsert)
+		return (sortedIndexes[indexMax] + sortedIndexes[0] + 1);
+	if (sortedIndexes[indexMax] - sortedIndexes[indexMin] == sortedIndexes[0] + 1)
+		return (sortedIndexes[indexMax]);
+	return (sortedIndexes[indexMax] - sortedIndexes[0] - 1);
+}
+
+
+void	insertion(std::vector<int> & nbrs, size_t range) {
+
+	std::vector<size_t> sortedIndexes;
+	std::vector<size_t> unsortedIndexes;
+	size_t	size = nbrs.size();
+
+	for (size_t i = range - 1; i < size; i += range)
+	{
+		if (i < 2 * range || i / range % 2)
+			sortedIndexes.push_back(i);
+		else
+			unsortedIndexes.push_back(i);
+	}
+
+	int		duoJacobsthalNbr = getDuoJacobsthalNbr(true);
+	int		indexMax = getMultipleOfTwo(true) - 1;
+	size_t	whereInsertMe, whereImFrom;
+
+	while (unsortedIndexes.empty() == false)
+	{
+		for (int ind = std::min(duoJacobsthalNbr, static_cast<int>(unsortedIndexes.size())) - 1; ind > -1; --ind)
+		{
+			whereInsertMe = whereInsert(nbrs, sortedIndexes, nbrs[unsortedIndexes[ind]], indexMax);
+			whereImFrom = unsortedIndexes[ind];
+			for (size_t j = 0; j < range; j++)
+			{
+				nbrs.insert(nbrs.begin() + whereInsertMe - range + 1, nbrs[whereImFrom]);
+				nbrs.erase(nbrs.begin() + whereImFrom + 1);
+			}
+			unsortedIndexes.erase(unsortedIndexes.begin() + ind);
+			updateIndex(whereInsertMe, whereImFrom, sortedIndexes, range);
+			updateIndex(whereInsertMe, whereImFrom, unsortedIndexes, range);
+			sortedIndexes.insert(std::lower_bound(sortedIndexes.begin(), sortedIndexes.end(), whereInsertMe), whereInsertMe);
+		}
+		duoJacobsthalNbr = getDuoJacobsthalNbr(false);
+		indexMax = getMultipleOfTwo(false) - 1;
+	}
+}
+
+size_t  PmergeMe::get_Jacobstahl_Number(bool restart){
+
+  static size_t antePenultimate = 0;
+  static size_t number = 1;
+
+  if (restart){
+    antePenultimate = 0;
+    number = 1;
   }
+  int tmp = antePenultimate;
+  antePenultimate = number;
+  number = 2 * tmp + number;
+  return (number);
+}
+
+size_t  PmergeMe::find_position_in_vector(std::vector<int> & vec, int target){
+
+  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), target)));
+}
+
+void  PmergeMe::fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range){
+
+  std::vector<int>::iterator it = _vec_to_sort.begin() + range - 1;
+
+  for (size_t i = range - 1; i < _vec_to_sort.size(); it += range, i += range){
+    if (i < 2 * range || i / range % 2)
+      main_chain.push_back(*it);
+    else 
+      pending_chain.push_back(*it);
+  }
+  return;
+}
+
+void  PmergeMe::vec_insertions(int range){
+
+  std::vector<int> main_chain;
+  std::vector<int> pending_chain;
+
+  fill_chains(main_chain, pending_chain, range);
 
 }
 
@@ -119,11 +261,10 @@ void  PmergeMe::vec_merge_insertion(int range){
   }
   print_vector(range);
   vec_merge_insertion(range * 2);
-  if (group_nbs > 2){
-    vec_do_insertions()
-    std::cout << "I will need to do insertions on range: " << range << " On these groups" << std::endl;
-    print_vector(range);
-  }
+  vec_insertions(range);
+
+  //insertion(_vec_to_sort, range); 
+  print_vector(range);
   return;
 }
 
