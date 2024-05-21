@@ -34,10 +34,14 @@ class PmergeMe{
     void  fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range);
 
     void  vec_swap_groups(std::vector<int>::iterator left, std::vector<int>::iterator right, int range);
-    void  vec_insertions(int range);
+
+
+    void  vec_insert_a_number(size_t index_to, size_t index_from, size_t range);
+    size_t  vec_binary_search(std::vector<int> & main_chain, int target, size_t index_max);
+    void  vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t index_max, size_t range);
+    void  vec_setup_insertions(int range);
     void  vec_merge_insertion(int range);
     void  sort_vector(char **args);
-    void  sort_deque(char **args);
     void  sort_lis(char **args);
 
     class ParsingError : public std::exception {
