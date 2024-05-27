@@ -243,7 +243,7 @@ size_t  PmergeMe::vec_binary_search(std::vector<int> & main_chain, int target, s
   size_t index_med;
 
   while(index_min + 1 != index_max){
-    index_med = index_min + (index_max / 2);
+    index_med = (index_min + index_max) / 2;
     if (main_chain[index_med] > target)
       index_max = index_med;
     else 
@@ -264,27 +264,50 @@ void  PmergeMe::vec_insert_a_number(size_t index_to, size_t index_from, size_t r
   for (size_t i = 0; i < range; i++){
     number = _vec_to_sort[index_from];
     _vec_to_sort.insert(_vec_to_sort.begin() + index_to, number);
-    _vec_to_sort.erase(_vec_to_sort.begin() + index_from + range - 1);
+    if (range > 1)
+      _vec_to_sort.erase(_vec_to_sort.begin() + index_from + range - 1);
+    else 
+      _vec_to_sort.erase(_vec_to_sort.begin() + index_from + range);
   }
   return ;
 }
 
 void  PmergeMe::vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t index_max, size_t range){
 
-  int  index = std::min(jacobstahl, pending_chain.size() - 1);
-  size_t  index_to;
-  size_t  index_from; 
+  //int  index = std::min(jacobstahl, pending_chain.size() - 1);
+  (void)jacobstahl;
+  int index = 0;
+  size_t  main_chain_position, index_to, index_from;
 
-  while (index > -1){
-    index_to = vec_binary_search(main_chain, pending_chain[index], index_max) * range;
-    index_from = find_position_in_vector(_vec_to_sort, pending_chain[index]);
-    vec_insert_a_number(index_to, index_from, range);
-    main_chain.insert(main_chain.begin() + (index_to / range), pending_chain[index]);
-    pending_chain.erase(pending_chain.begin() + index);
-    index_max++;
-    index--;
-  }
+  /* while (index > -1){ */
+  /*   index_to = vec_binary_search(main_chain, pending_chain[index], index_max) * range; */
+  /*   index_from = find_position_in_vector(_vec_to_sort, pending_chain[index]); */
+  /*   vec_insert_a_number(index_to, index_from, range); */
+  /*   main_chain.insert(main_chain.begin() + (index_to / range), pending_chain[index]); */
+  /*   pending_chain.erase(pending_chain.begin() + index); */
+  /*   index_max++; */
+  /*   index--; */
+  /* } */
+
+  main_chain_position = vec_binary_search(main_chain, pending_chain[index], index_max); 
+  if (main_chain_position == main_chain.size())
+    index_to = _vec_to_sort.size();
+  else
+    index_to = find_position_in_vector(_vec_to_sort, main_chain[main_chain_position]) + 1;
+  if (static_cast<int>(index_to - range) >= 0)
+    index_to -= range;
+  index_from = find_position_in_vector(_vec_to_sort, pending_chain[index]); 
+  vec_insert_a_number(index_to, index_from, range); 
+  main_chain.insert(main_chain.begin() + (main_chain_position), pending_chain[index]); 
+  pending_chain.erase(pending_chain.begin() + index); 
   return;
+}
+
+size_t PmergeMe::find_index_max(int target, int range, std::vector<int> & main_chain){
+
+  int prev_index = _vec_to_sort[find_position_in_vector(_vec_to_sort, target) - range];
+
+  return find_position_in_vector(main_chain, prev_index);
 }
 
 void  PmergeMe::vec_setup_insertions(int range){
@@ -296,12 +319,15 @@ void  PmergeMe::vec_setup_insertions(int range){
   fill_chains(main_chain, pending_chain, range);
   if (jacobstahl > pending_chain.size())
     jacobstahl = pending_chain.size();
-  size_t index_max = (find_position_in_vector(_vec_to_sort, pending_chain[jacobstahl]) - jacobstahl) / range;
+  //size_t index_max = (find_position_in_vector(_vec_to_sort, pending_chain[jacobstahl]) - jacobstahl) / range;
+  //size_t index_max = (find_position_in_vector(_vec_to_sort, *pending_chain.rbegin()) - range) / range - (pending_chain.size() - 1);
+  size_t index_max;
 
   while(!pending_chain.empty()){
+    index_max = find_index_max(pending_chain.front(), range, main_chain);
     vec_insertions(main_chain, pending_chain, jacobstahl, index_max, range);
     jacobstahl = get_Jacobstahl_Number(false) - 1;
-    index_max = (find_position_in_vector(_vec_to_sort, pending_chain[jacobstahl]) / 4) - 1;
+    //index_max = (find_position_in_vector(_vec_to_sort, pending_chain[jacobstahl]) / 4) - 1;
   }
 }
 
