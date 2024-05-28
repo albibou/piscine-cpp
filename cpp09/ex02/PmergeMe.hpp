@@ -38,7 +38,7 @@ class PmergeMe{
 
     void  vec_insert_a_number(size_t index_to, size_t index_from, size_t range);
     size_t  vec_binary_search(std::vector<int> & main_chain, int target, size_t index_max);
-    void  vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t index_max, size_t range);
+    void  vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t range);
 
     size_t find_index_max(int target, int range, std::vector<int> & main_chain);
     void  vec_setup_insertions(int range);
