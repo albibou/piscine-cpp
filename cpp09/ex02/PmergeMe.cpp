@@ -171,13 +171,14 @@ void  PmergeMe::vec_insertions(std::vector<int> & main_chain, std::vector<int> &
   index_max = find_index_max(pending_chain[index], range, main_chain);
   while (index > -1){
     main_chain_position = vec_binary_search(main_chain, pending_chain[index], index_max); 
-    if (main_chain_position == main_chain.size())
-      index_to = main_chain.size() * range + range;
+    if (main_chain_position == main_chain.size()){
+      index_to = find_position_in_vector(_vec_to_sort, main_chain[main_chain_position - 1]) + range + 1;
+    }
     else{
       index_to = find_position_in_vector(_vec_to_sort, main_chain[main_chain_position]) + 1;
-      if (static_cast<int>(index_to - range) >= 0)
-        index_to -= range;
     }
+    if (static_cast<int>(index_to - range) >= 0)
+      index_to -= range;
     index_from = find_position_in_vector(_vec_to_sort, pending_chain[index]); 
     vec_insert_a_number(index_to, index_from, range); 
     main_chain.insert(main_chain.begin() + (main_chain_position), pending_chain[index]); 
