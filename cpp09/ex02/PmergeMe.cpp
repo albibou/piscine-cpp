@@ -1,17 +1,22 @@
-#include "PmergeMe.hpp"
+#ifndef PMERGEME_CPP
+# define PMERGEME_CPP
+
+# include "PmergeMe.hpp"
 
 ////////////////////////////////////////////////////////////////////
 ///                 Constructors, Destructors                    ///
 ////////////////////////////////////////////////////////////////////
 
-PmergeMe::PmergeMe(void){
+template <template<typename, typename> class Container>
+PmergeMe<Container>::PmergeMe(void){
 
   if (PRINT)
     std::cout << "Default constructor called" << std::endl;
   return ;
 } 
 
-PmergeMe::PmergeMe(PmergeMe const & rhs){
+template <template<typename, typename> class Container>
+PmergeMe<Container>::PmergeMe(PmergeMe<Container> const & rhs){
 
   *this = rhs;
   if (PRINT)
@@ -19,7 +24,8 @@ PmergeMe::PmergeMe(PmergeMe const & rhs){
   return ;
 }
 
-PmergeMe::~PmergeMe(void){
+template <template<typename, typename> class Container>
+PmergeMe<Container>::~PmergeMe<Container>(void){
 
   if (PRINT)
     std::cout << "Default destructor called" << std::endl;
@@ -30,14 +36,11 @@ PmergeMe::~PmergeMe(void){
 ///                       Operator overloads                     ///
 ////////////////////////////////////////////////////////////////////
 
-PmergeMe & PmergeMe::operator=(PmergeMe const & rhs){
+template <template<typename, typename> class Container>
+PmergeMe<Container> & PmergeMe<Container>::operator=(PmergeMe<Container> const & rhs){
 
   if (this != &rhs) 
-  {
-    _vec_to_sort = rhs._vec_to_sort;
-    _deq_to_sort = rhs._deq_to_sort;
-    _lis_to_sort = rhs._lis_to_sort;
-  }
+    _to_sort = rhs._to_sort;
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
   return *this;
@@ -47,7 +50,27 @@ PmergeMe & PmergeMe::operator=(PmergeMe const & rhs){
 ///                        Methods                               ///
 ////////////////////////////////////////////////////////////////////
 
-bool  PmergeMe::is_valid_int(const char * litteral) const {
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::print_container(std::string moment) {
+
+  std::cout << moment;
+  for (typename Container<int, std::allocator<int> >::iterator it = _to_sort.begin(); it != _to_sort.end(); it++)
+    std::cout << *it << " ";
+  std::cout << std::endl;
+  return ;
+}
+
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::print_time_to_sort(std::string type) const{
+  
+  double time = static_cast<double>(_sort_time / CLOCKS_PER_SEC) * 1000000;
+  std::cout << "Time to process a range of " << _to_sort.size() << " elements with std::" <<
+    type << " : " << time << "ms" << std::endl;
+  return ;
+}
+
+template <template<typename, typename> class Container>
+bool  PmergeMe<Container>::is_valid_int(const char * litteral) const {
 
   char    *tmp = NULL;
   double  num = strtod(litteral, &tmp);
@@ -60,26 +83,17 @@ bool  PmergeMe::is_valid_int(const char * litteral) const {
   return true;
 }
 
-void  PmergeMe::print_vector(int range) const{
-  
-  if (!range)
-    std::cout << "Numbers to sort :";
+template <template<typename, typename> class Container>
+size_t  PmergeMe<Container>::find_position_in_container(std::vector<int> & vec, int target, int mode){
+
+  if (mode == 1)
+    return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), target)));
   else
-    std::cout << "Call on groups of size " << range * 2 << std::endl;
-  std::cout << "(";
-  int i = 0;
-  for (std::vector<int>::const_iterator it = _vec_to_sort.begin(); it != _vec_to_sort.end(); it++, i++){
-    if (i && range && i % (range * 2) == 0)
-      std::cout << ")(";
-    else if (i)
-      std::cout << ",";
-    std::cout << *it;
-  }
-  std::cout << ")" << std::endl << std::endl;
-  return ;
+    return (std::distance(_to_sort.begin(), std::find(_to_sort.begin(), _to_sort.end(), target)));
 }
 
-void  PmergeMe::vec_swap_groups(std::vector<int>::iterator left, std::vector<int>::iterator right, int range){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::swap_groups(typename Container<int, std::allocator<int> >::iterator left, typename Container<int, std::allocator<int> >::iterator right, int range){
 
   int tmp;
 
@@ -90,7 +104,8 @@ void  PmergeMe::vec_swap_groups(std::vector<int>::iterator left, std::vector<int
   } 
 }
 
-size_t  PmergeMe::get_Jacobstahl_Number(bool restart){
+template <template<typename, typename> class Container>
+size_t  PmergeMe<Container>::get_Jacobstahl_Number(bool restart){
 
   static size_t antePenultimate = 0;
   static size_t number = 1;
@@ -105,16 +120,12 @@ size_t  PmergeMe::get_Jacobstahl_Number(bool restart){
   return (number);
 }
 
-size_t  PmergeMe::find_position_in_vector(std::vector<int> & vec, int target){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range){
 
-  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), target)));
-}
+  typename Container<int, std::allocator<int> >::iterator it = _to_sort.begin() + range - 1;
 
-void  PmergeMe::fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range){
-
-  std::vector<int>::iterator it = _vec_to_sort.begin() + range - 1;
-
-  for (size_t i = range - 1; i < _vec_to_sort.size(); it += range, i += range){
+  for (size_t i = range - 1; i < _to_sort.size(); it += range, i += range){
     if (i < 2 * range || i / range % 2)
       main_chain.push_back(*it);
     else 
@@ -123,7 +134,16 @@ void  PmergeMe::fill_chains(std::vector<int> & main_chain, std::vector<int> & pe
   return;
 }
 
-size_t  PmergeMe::vec_binary_search(std::vector<int> & main_chain, int target, size_t index_max){
+template <template<typename, typename> class Container>
+size_t PmergeMe<Container>::find_index_max(int target, int range, std::vector<int> & main_chain){
+
+  int prev_index = _to_sort[find_position_in_container(main_chain, target, 0) - range];
+
+  return find_position_in_container(main_chain, prev_index, 1);
+}
+
+template <template<typename, typename> class Container>
+size_t  PmergeMe<Container>::binary_search(std::vector<int> & main_chain, int target, size_t index_max){
 
   size_t index_min = 0;
   size_t index_med;
@@ -143,17 +163,18 @@ size_t  PmergeMe::vec_binary_search(std::vector<int> & main_chain, int target, s
     return index_max;
 }
 
-void  PmergeMe::vec_insert_a_number(size_t index_to, size_t index_from, size_t range){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::insert_a_number(size_t index_to, size_t index_from, size_t range){
 
   int number;
 
   for (size_t i = 0; i < range; i++){
-    number = _vec_to_sort[index_from];
-    _vec_to_sort.insert(_vec_to_sort.begin() + index_to, number);
+    number = _to_sort[index_from];
+    _to_sort.insert(_to_sort.begin() + index_to, number);
     if (index_to < index_from)
-      _vec_to_sort.erase(_vec_to_sort.begin() + index_from + 1);
+      _to_sort.erase(_to_sort.begin() + index_from + 1);
     else {
-      _vec_to_sort.erase(_vec_to_sort.begin() + index_from);
+      _to_sort.erase(_to_sort.begin() + index_from);
       index_from--;
       index_to--;
     }
@@ -161,7 +182,8 @@ void  PmergeMe::vec_insert_a_number(size_t index_to, size_t index_from, size_t r
   return ;
 }
 
-void  PmergeMe::vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t range){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t range){
 
   int index = jacobstahl;
   size_t  main_chain_position, index_max, index_to, index_from;
@@ -170,17 +192,17 @@ void  PmergeMe::vec_insertions(std::vector<int> & main_chain, std::vector<int> &
     index = pending_chain.size() - 1;
   index_max = find_index_max(pending_chain[index], range, main_chain);
   while (index > -1){
-    main_chain_position = vec_binary_search(main_chain, pending_chain[index], index_max); 
+    main_chain_position = binary_search(main_chain, pending_chain[index], index_max); 
     if (main_chain_position == main_chain.size()){
-      index_to = find_position_in_vector(_vec_to_sort, main_chain[main_chain_position - 1]) + range + 1;
+      index_to = find_position_in_container(main_chain, main_chain[main_chain_position - 1], 0) + range + 1;
     }
     else{
-      index_to = find_position_in_vector(_vec_to_sort, main_chain[main_chain_position]) + 1;
+      index_to = find_position_in_container(main_chain, main_chain[main_chain_position], 0) + 1;
     }
     if (static_cast<int>(index_to - range) >= 0)
       index_to -= range;
-    index_from = find_position_in_vector(_vec_to_sort, pending_chain[index]); 
-    vec_insert_a_number(index_to, index_from, range); 
+    index_from = find_position_in_container(main_chain, pending_chain[index], 0); 
+    insert_a_number(index_to, index_from, range); 
     main_chain.insert(main_chain.begin() + (main_chain_position), pending_chain[index]); 
     pending_chain.erase(pending_chain.begin() + index); 
     index--;
@@ -188,14 +210,8 @@ void  PmergeMe::vec_insertions(std::vector<int> & main_chain, std::vector<int> &
   return;
 }
 
-size_t PmergeMe::find_index_max(int target, int range, std::vector<int> & main_chain){
-
-  int prev_index = _vec_to_sort[find_position_in_vector(_vec_to_sort, target) - range];
-
-  return find_position_in_vector(main_chain, prev_index);
-}
-
-void  PmergeMe::vec_setup_insertions(int range){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::setup_insertions(int range){
 
   std::vector<int> main_chain;
   std::vector<int> pending_chain;
@@ -203,45 +219,54 @@ void  PmergeMe::vec_setup_insertions(int range){
 
   fill_chains(main_chain, pending_chain, range);
   while(!pending_chain.empty()){
-    vec_insertions(main_chain, pending_chain, jacobstahl, range);
+    insertions(main_chain, pending_chain, jacobstahl, range);
     jacobstahl = get_Jacobstahl_Number(false) - 1;
   }
+  return ;
 }
 
-void  PmergeMe::vec_merge_insertion(int range){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::merge_insertion(int range){
 
-  std::vector<int>::iterator left = _vec_to_sort.begin() + range - 1;
-  std::vector<int>::iterator right = _vec_to_sort.begin() + (range * 2) - 1;
+  typename Container<int, std::allocator<int> >::iterator left = _to_sort.begin() + range - 1;
+  typename Container<int, std::allocator<int> >::iterator right = _to_sort.begin() + (range * 2) - 1;
 
-  size_t  group_nbs = (_vec_to_sort.size() / range) / 2; 
+  size_t  group_nbs = (_to_sort.size() / range) / 2; 
 
   if (!group_nbs)
     return;
   for (size_t i = 0; i < group_nbs; i++, left += (range * 2), right += (range * 2)){
     if (*left > *right)
-      vec_swap_groups(left, right, range);
+      swap_groups(left, right, range);
   }
-  print_vector(range);
-  vec_merge_insertion(range * 2);
-  vec_setup_insertions(range);
-
-  //insertion(_vec_to_sort, range); 
-  print_vector(range);
+  merge_insertion(range * 2);
+  setup_insertions(range);
   return;
 }
 
-void  PmergeMe::sort_vector(char **args){
+template <template<typename, typename> class Container>
+void  PmergeMe<Container>::sort_container(char **args, int print){
   
+  int num = 0;
+  typename Container<int, std::allocator<int> >::iterator it;
+
   for (size_t i = 0; args[i]; i++){
 
     if (!is_valid_int(args[i]))
-      throw PmergeMe::ParsingError();
-    _vec_to_sort.push_back(atoi(args[i]));
+      throw PmergeMe<Container>::ParsingError();
+    num = atoi(args[i]);
+    it = std::find(_to_sort.begin(), _to_sort.end(), num);
+    if (it != _to_sort.end())
+      throw PmergeMe<Container>::DoubleValue();
+    _to_sort.push_back(num);
   }
-  print_vector(0);
-  _vec_time = clock();
-  vec_merge_insertion(1);
-  _vec_time = clock() - _vec_time;
+  if (print == PRINT_CONTAINER)
+    print_container("Before: ");
+  _sort_time = clock();
+  merge_insertion(1);
+  if (print == PRINT_CONTAINER)
+  print_container("After: ");
+  _sort_time = clock() - _sort_time;
   return ;
 }
 
@@ -249,7 +274,16 @@ void  PmergeMe::sort_vector(char **args){
 ///                        Exceptions                            ///
 ////////////////////////////////////////////////////////////////////
 
-const char *  PmergeMe::ParsingError::what() const throw() {
+template <template<typename, typename> class Container>
+const char *  PmergeMe<Container>::ParsingError::what() const throw() {
 
   return "Error in a value, only use positive integers.";
 }
+
+template <template<typename, typename> class Container>
+const char *  PmergeMe<Container>::DoubleValue::what() const throw() {
+
+  return "Error in a value, integer list can't contain duplicates.";
+}
+
+#endif

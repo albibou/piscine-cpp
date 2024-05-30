@@ -2,8 +2,10 @@
 # define PMERGEME_H 
 
 # include <iostream>
+# include <iomanip>
 # include <string>
 # include <cstdlib>
+# include <ctime>
 # include <limits>
 # include <vector>
 # include <list>
@@ -12,8 +14,11 @@
 
 # ifndef PRINT
 #  define PRINT 0
+#  define PRINT_CONTAINER 1
+#  define NO_PRINT_CONTAINER 2
 # endif
 
+template <template<typename, typename> class Container>
 class PmergeMe{
 
   public :
@@ -24,28 +29,29 @@ class PmergeMe{
 
     PmergeMe & operator=(PmergeMe const & rhs);
 
-    bool  is_valid_int(const char * litteral) const;
+    void    print_container(std::string moment);
+    void    print_time_to_sort(std::string type) const;
+    void    sort_container(char **args, int print);
 
-    void  print_vector(int range) const;
-    void  print_container
+  private :
 
+    Container<int, std::allocator<int> >  _to_sort;
+    clock_t          _sort_time;
+
+    bool    is_valid_int(const char * litteral) const;
+
+    size_t  find_position_in_container(std::vector<int> & vec, int target, int mode);
+    void    swap_groups(typename Container<int, std::allocator<int> >::iterator left, typename Container<int, std::allocator<int> >::iterator right, int range);
 
     size_t  get_Jacobstahl_Number(bool restart);
-    size_t  find_position_in_vector(std::vector<int> & vec, int target);
-    void  fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range);
+    void    fill_chains(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t range);
+    size_t  binary_search(std::vector<int> & main_chain, int target, size_t index_max);
+    size_t  find_index_max(int target, int range, std::vector<int> & main_chain);
 
-    void  vec_swap_groups(std::vector<int>::iterator left, std::vector<int>::iterator right, int range);
-
-
-    void  vec_insert_a_number(size_t index_to, size_t index_from, size_t range);
-    size_t  vec_binary_search(std::vector<int> & main_chain, int target, size_t index_max);
-    void  vec_insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t range);
-
-    size_t find_index_max(int target, int range, std::vector<int> & main_chain);
-    void  vec_setup_insertions(int range);
-    void  vec_merge_insertion(int range);
-    void  sort_vector(char **args);
-    void  sort_lis(char **args);
+    void    insert_a_number(size_t index_to, size_t index_from, size_t range);
+    void    insertions(std::vector<int> & main_chain, std::vector<int> & pending_chain, size_t jacobstahl, size_t range);
+    void    setup_insertions(int range);
+    void    merge_insertion(int range);
 
     class ParsingError : public std::exception {
 
@@ -53,17 +59,13 @@ class PmergeMe{
         const char * what() const throw();
     };
 
-  private :
+    class DoubleValue : public std::exception {
 
-    std::vector<int>  _vec_to_sort;
-    std::deque<int>   _deq_to_sort;
-    std::list<int>    _lis_to_sort;
-    
-    clock_t           _vec_time;
-    clock_t           _deq_time;
-    clock_t           _lis_time;
-
-
+      public :
+        const char * what() const throw();
+    };
 };
+
+# include "PmergeMe.cpp"
 
 #endif
