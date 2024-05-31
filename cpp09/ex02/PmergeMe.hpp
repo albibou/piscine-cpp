@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 11:35:32 by atardif           #+#    #+#             */
+/*   Updated: 2024/05/31 11:35:50 by atardif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PMERGEME_H
 # define PMERGEME_H 
 
@@ -38,6 +50,7 @@ class PmergeMe{
     Container<int, std::allocator<int> >  _to_sort;
     clock_t          _sort_time;
 
+    bool    is_sorted(void);
     bool    is_valid_int(const char * litteral) const;
 
     size_t  find_position_in_container(std::vector<int> & vec, int target, int mode);
@@ -60,6 +73,12 @@ class PmergeMe{
     };
 
     class DoubleValue : public std::exception {
+
+      public :
+        const char * what() const throw();
+    };
+
+    class NotSorted : public std::exception {
 
       public :
         const char * what() const throw();

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 11:35:22 by atardif           #+#    #+#             */
+/*   Updated: 2024/05/31 11:35:23 by atardif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PMERGEME_CPP
 # define PMERGEME_CPP
 
@@ -63,10 +75,23 @@ void  PmergeMe<Container>::print_container(std::string moment) {
 template <template<typename, typename> class Container>
 void  PmergeMe<Container>::print_time_to_sort(std::string type) const{
   
-  double time = static_cast<double>(_sort_time / CLOCKS_PER_SEC) * 1000000;
+  double time = static_cast<double>(_sort_time * 1000000 / CLOCKS_PER_SEC) / 1000000;
   std::cout << "Time to process a range of " << _to_sort.size() << " elements with std::" <<
-    type << " : " << time << "ms" << std::endl;
+    type << " : " << std::fixed << time << "us" << std::endl;
   return ;
+}
+
+template <template<typename, typename> class Container>
+bool    PmergeMe<Container>::is_sorted(void){
+
+  typename Container<int, std::allocator<int> >::iterator begin = _to_sort.begin();
+  if (begin == _to_sort.end())
+    return true;
+  for(typename Container<int, std::allocator<int> >::iterator next = _to_sort.begin() + 1; next != _to_sort.end(); next++, begin++){
+    if (*begin > *next)
+      return false;
+  }
+  return true;
 }
 
 template <template<typename, typename> class Container>
@@ -267,6 +292,8 @@ void  PmergeMe<Container>::sort_container(char **args, int print){
   if (print == PRINT_CONTAINER)
   print_container("After: ");
   _sort_time = clock() - _sort_time;
+  if (!is_sorted())
+    throw PmergeMe<Container>::NotSorted();
   return ;
 }
 
@@ -284,6 +311,12 @@ template <template<typename, typename> class Container>
 const char *  PmergeMe<Container>::DoubleValue::what() const throw() {
 
   return "Error in a value, integer list can't contain duplicates.";
+}
+
+template <template<typename, typename> class Container>
+const char *  PmergeMe<Container>::NotSorted::what() const throw() {
+
+  return "Container isn't sorted after algorithm.";
 }
 
 #endif

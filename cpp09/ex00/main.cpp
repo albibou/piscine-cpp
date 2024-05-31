@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atardif <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/31 14:04:04 by atardif           #+#    #+#             */
+/*   Updated: 2024/05/31 14:04:06 by atardif          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "BitcoinExchange.hpp"
 
 int main(int argc, char **argv){
@@ -10,16 +22,6 @@ int main(int argc, char **argv){
   }
   catch (const std::exception & e){
     std::cerr << e.what() << std::endl;
-  }
-  /* (void)argc; */
-  /* (void)argv; */
-  /* try { */
-  /*   BitcoinExchange btc; */
-  /**/
-  /*   btc.print_data_set(); */
-  /* } */
-  /* catch (const std::exception & e){ */
-  /*   std::cerr << e.what() << std::endl; */
-  /* } */
+  }   
   return (0);
 }
