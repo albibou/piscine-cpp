@@ -75,9 +75,9 @@ void  PmergeMe<Container>::print_container(std::string moment) {
 template <template<typename, typename> class Container>
 void  PmergeMe<Container>::print_time_to_sort(std::string type) const{
   
-  double time = static_cast<double>(_sort_time * 1000000 / CLOCKS_PER_SEC) / 1000000;
+  double time = _sort_time / (double)CLOCKS_PER_SEC * 1000;
   std::cout << "Time to process a range of " << _to_sort.size() << " elements with std::" <<
-    type << " : " << std::fixed << time << "us" << std::endl;
+    type << " : " << std::fixed << std::setprecision(3) << time << " milliseconds" << std::endl;
   return ;
 }
 
@@ -253,16 +253,18 @@ void  PmergeMe<Container>::setup_insertions(int range){
 template <template<typename, typename> class Container>
 void  PmergeMe<Container>::merge_insertion(int range){
 
-  typename Container<int, std::allocator<int> >::iterator left = _to_sort.begin() + range - 1;
-  typename Container<int, std::allocator<int> >::iterator right = _to_sort.begin() + (range * 2) - 1;
-
   size_t  group_nbs = (_to_sort.size() / range) / 2; 
 
   if (!group_nbs)
     return;
+  typename Container<int, std::allocator<int> >::iterator left = _to_sort.begin() + range - 1;
+  typename Container<int, std::allocator<int> >::iterator right = _to_sort.begin() + (range * 2) - 1;
+
   for (size_t i = 0; i < group_nbs; i++, left += (range * 2), right += (range * 2)){
     if (*left > *right)
       swap_groups(left, right, range);
+    if ((range * 2) * (i + 2) > _to_sort.size())
+      break ;
   }
   merge_insertion(range * 2);
   setup_insertions(range);

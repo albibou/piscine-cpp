@@ -18,12 +18,7 @@
 
 BitcoinExchange::BitcoinExchange(void){
 
-  try {
-    set_database();
-  }
-  catch (const std::exception & e){
-    std::cerr << e.what() << std::endl;
-  }
+  set_database();
   if (PRINT)
     std::cout << "Default constructor called" << std::endl;
   return ;
@@ -70,8 +65,11 @@ BitcoinExchange & BitcoinExchange::operator=(BitcoinExchange const & rhs){
 
 void  BitcoinExchange::check_input_file(std::ifstream & file, int type) const{
 
-  if (!file.is_open())
+  if (!file.is_open()){
+    if (type == DATABASEFILE)
+      throw BitcoinExchange::DataFileNotOpen();
     throw BitcoinExchange::FileNotOpen();
+  }
   if (file.peek() == std::ifstream::traits_type::eof())
     throw BitcoinExchange::FileIsEmpty();
   std::string line;
@@ -192,7 +190,7 @@ bool  BitcoinExchange::amount_value_is_valid(std::string const & value, std::str
     return (std::cerr << "Error: bad input => " << line << std::endl, false);
   if (input_value < 0)
     return (std::cerr << "Error: not a positive number." << std::endl, false);
-  if (input_value >= std::numeric_limits<int>::max())
+  if (input_value > 1000)
     return (std::cerr << "Error: too large a number." << std::endl, false);
   return true; 
 }
@@ -211,13 +209,13 @@ bool BitcoinExchange::get_previous_date(std::string & date) const{
       year--;
       if (year < 2009)
         return (std::cerr << "Error: cannot find previous date" << std::endl, false); 
-      if (month == 2 && is_leap_year(static_cast<double>(year)))
-        day = 29;
-      else if (month == 4 || month == 6 || month == 9 || month == 11)
-        day = 30;
-      else 
-        day = 31;
     }
+    if (month == 2 && is_leap_year(static_cast<double>(year)))
+      day = 29;
+    else if (month == 4 || month == 6 || month == 9 || month == 11)
+      day = 30;
+    else 
+      day = 31;
   }
   std::ostringstream newDateStream;
   newDateStream << year << "-";
@@ -278,7 +276,6 @@ void  BitcoinExchange::parse_input_file(std::ifstream & input_file) const{
       continue ;
     }
     std::cout << date << " =>" << amount <<  " = ";
-    //std::cout << std::fixed << std::setprecision(get_precision_from_value(btc_value)) << result << std::endl;
     std::cout << std::fixed << std::setprecision(2) << result << std::endl;
   }
   return;
@@ -301,6 +298,11 @@ void  BitcoinExchange::exchange(std::string const file_name) const{
 const char *  BitcoinExchange::FileNotOpen::what() const throw() {
 
   return "File could not be opened !";
+}
+
+const char *  BitcoinExchange::DataFileNotOpen::what() const throw() {
+
+  return "Database could not be opened !";
 }
 
 const char *  BitcoinExchange::FileIsEmpty::what() const throw() {

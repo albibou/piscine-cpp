@@ -4,8 +4,8 @@ NAME = btc
 
 # Compiler
 
-CXX	= c++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98
+CXX	= g++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -g3
 # Paths
 
 SRC_PATH	= ./

@@ -94,21 +94,21 @@ bool  RPN::do_operation(char const op){
     return (_error << ZERO_DIVISION, false);
 switch (op){
     case '+':
-      result = operand2 + operand1;
+      result = static_cast<double>(operand2) + static_cast<double>(operand1);
       break ;
     case '-':
-      result = operand2 - operand1;
+      result = static_cast<double>(operand2) - static_cast<double>(operand1);
       break ;
     case '*':
-      result = operand2 * operand1;
+      result = static_cast<double>(operand2) * static_cast<double>(operand1);
       break ;
     case '/':
-      result = operand2 / operand1;
+      result = static_cast<double>(operand2) / static_cast<double>(operand1);
       break ;
   }
   if (std::abs(result) < std::numeric_limits<int>::min() || std::abs(result) > std::numeric_limits<int>::max())
     return (_error << get_faulty_operation(op, operand1, operand2) << OPERATION_OVERFLOW, false);
-  _stack.push(static_cast<int>(std::abs(result)));
+  _stack.push(static_cast<int>(result));
   return true;
 }
 

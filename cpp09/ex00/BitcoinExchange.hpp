@@ -65,6 +65,9 @@ class BitcoinExchange{
     class FileNotOpen : public std::exception{
       const char * what() const throw();
     }; 
+    class DataFileNotOpen : public std::exception{
+      const char * what() const throw();
+    }; 
     class FileIsEmpty : public std::exception{
       const char * what() const throw();
     }; 
