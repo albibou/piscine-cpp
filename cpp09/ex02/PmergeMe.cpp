@@ -51,8 +51,10 @@ PmergeMe<Container>::~PmergeMe<Container>(void){
 template <template<typename, typename> class Container>
 PmergeMe<Container> & PmergeMe<Container>::operator=(PmergeMe<Container> const & rhs){
 
-  if (this != &rhs) 
+  if (this != &rhs){
     _to_sort = rhs._to_sort;
+    _sort_time = rhs._sort_time;
+  }
   if (PRINT)
     std::cout << "Assignation operator called" << std::endl;
   return *this;

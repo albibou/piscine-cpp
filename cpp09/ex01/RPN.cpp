@@ -77,7 +77,7 @@ std::string  RPN::get_faulty_operation(char const op, int operand1, int operand2
   std::stringstream op2_stream;
   
   op1_stream << operand1;
-  op1_stream << operand2;
+  op2_stream << operand2;
 
   return (op1_stream.str() + " " + op + " " + op2_stream.str());
 }

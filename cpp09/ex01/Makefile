@@ -4,8 +4,8 @@ NAME = RPN
 
 # Compiler
 
-CXX	= g++
-FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -g3
+CXX	= c++
+FLAGS	= -Wall -Werror -Wextra -MMD -MP -std=c++98 -g3 -fno-limit-debug-info
 # Paths
 
 SRC_PATH	= ./
